@@ -9,7 +9,12 @@ import Foundation
 
 func getRandomQuoteByClassification(classification: String, completion: @escaping (Quote?, Error?) -> Void) {
 
-    let url = URL(string: "http://quote-dropper.fly.dev/quotes/classification=\(classification)")!
+    var urlString = "http://quote-dropper.fly.dev/quotes/classification=\(classification)"
+    if classification == "all" {
+        urlString = "http://quote-dropper.fly.dev/quotes"
+    }
+    
+    let url = URL(string: urlString)!
 
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
