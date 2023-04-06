@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		DC60145929DE66C300A950F6 /* Quote_DropletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */; };
-		DC60145B29DE66C300A950F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60145A29DE66C300A950F6 /* ContentView.swift */; };
+		DC60145B29DE66C300A950F6 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60145A29DE66C300A950F6 /* QuoteView.swift */; };
 		DC60145D29DE66C400A950F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC60145C29DE66C400A950F6 /* Assets.xcassets */; };
 		DC60146029DE66C400A950F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC60145F29DE66C400A950F6 /* Preview Assets.xcassets */; };
+		DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146729DE696D00A950F6 /* QuoteClassification.swift */; };
+		DC60146A29DE860C00A950F6 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146929DE860B00A950F6 /* Quote.swift */; };
+		DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146B29DE8CF100A950F6 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC60145529DE66C200A950F6 /* Quote-Droplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quote-Droplet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote_DropletApp.swift; sourceTree = "<group>"; };
-		DC60145A29DE66C300A950F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DC60145A29DE66C300A950F6 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		DC60145C29DE66C400A950F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC60145F29DE66C400A950F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC60146129DE66C400A950F6 /* Quote_Droplet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quote_Droplet.entitlements; sourceTree = "<group>"; };
+		DC60146729DE696D00A950F6 /* QuoteClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteClassification.swift; sourceTree = "<group>"; };
+		DC60146929DE860B00A950F6 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		DC60146B29DE8CF100A950F6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +59,12 @@
 			isa = PBXGroup;
 			children = (
 				DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */,
-				DC60145A29DE66C300A950F6 /* ContentView.swift */,
+				DC60145A29DE66C300A950F6 /* QuoteView.swift */,
+				DC60146729DE696D00A950F6 /* QuoteClassification.swift */,
+				DC60146929DE860B00A950F6 /* Quote.swift */,
 				DC60145C29DE66C400A950F6 /* Assets.xcassets */,
 				DC60146129DE66C400A950F6 /* Quote_Droplet.entitlements */,
+				DC60146B29DE8CF100A950F6 /* APIService.swift */,
 				DC60145E29DE66C400A950F6 /* Preview Content */,
 			);
 			path = "Quote-Droplet";
@@ -139,7 +148,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC60145B29DE66C300A950F6 /* ContentView.swift in Sources */,
+				DC60146A29DE860C00A950F6 /* Quote.swift in Sources */,
+				DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */,
+				DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */,
+				DC60145B29DE66C300A950F6 /* QuoteView.swift in Sources */,
 				DC60145929DE66C300A950F6 /* Quote_DropletApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +277,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Quote-Droplet/Quote_Droplet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -292,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Quote-Droplet/Quote_Droplet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
