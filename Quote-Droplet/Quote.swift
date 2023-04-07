@@ -10,6 +10,6 @@ import Foundation
 struct Quote: Codable {
     let id: Int
     let text: String
-    let author: String
-    let classification: String
+    let author: String?
+    let classification: String?
 }

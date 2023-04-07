@@ -44,8 +44,13 @@ func getRandomQuoteByClassification(classification: String, completion: @escapin
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let quotes = try decoder.decode([Quote].self, from: data)
-            let randomIndex = Int.random(in: 0..<quotes.count)
-            completion(quotes[randomIndex], nil)
+            
+            if quotes.isEmpty {
+                completion(Quote(id: -1, text: "No Quote Found.", author: nil, classification: nil), nil)
+            } else {
+                let randomIndex = Int.random(in: 0..<quotes.count)
+                completion(quotes[randomIndex], nil)
+            }
         } catch {
             completion(nil, error)
         }
