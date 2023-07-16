@@ -14,9 +14,9 @@ struct QuoteView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-//                Image("QuoteDroplet")
-//                    .resizable()
-//                    .frame(width: 60, height: 60)
+                Image("StewartLynch")
+                    .resizable()
+                    .frame(width: 60, height: 60)
                 VStack {
                     ForEach(QuoteClassification.allCases, id: \.self) {
                         item in
@@ -36,6 +36,8 @@ struct QuoteView: View {
                 ProgressView()
             } else {
                 Text(quoteString)
+                    .font(.system(size: 20)) // Adjust the font size as needed
+                    .lineLimit(nil)
                     .minimumScaleFactor(0.5)
             }
             Spacer()
