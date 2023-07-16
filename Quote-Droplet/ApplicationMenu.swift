@@ -13,11 +13,14 @@ class ApplicationMenu: NSObject {
     
     func createMenu() -> NSMenu {
         let quoteView = QuoteView()
+        
         let topView = NSHostingController(rootView: quoteView)
-        topView.view.frame.size = CGSize(width: 225, height: 225)
+        topView.view.frame.size = CGSize(width: 225, height: 300)
         
         let customMenuItem = NSMenuItem()
         customMenuItem.view = topView.view
+        
+        
         menu.addItem(customMenuItem)
         menu.addItem(NSMenuItem.separator())
         
