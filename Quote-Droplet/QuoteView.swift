@@ -47,6 +47,7 @@ struct QuoteView: View {
                         .font(.system(size: 14))
                         .foregroundColor(.secondary)
                 }
+                .id(UUID())
             }
             Spacer()
         }
