@@ -24,6 +24,11 @@ class ApplicationMenu: NSObject {
         menu.addItem(customMenuItem)
         menu.addItem(NSMenuItem.separator())
         
+        let aboutMenuItem = NSMenuItem(title: "About Quote Droplet",
+                                       action: #selector(about),
+                                       keyEquivalent: "")
+        aboutMenuItem.target = self
+        menu.addItem(aboutMenuItem)
         
         let webLinkMenuItem = NSMenuItem(title: "Visit my GitHub",
                                          action: #selector(openLink),
@@ -39,6 +44,9 @@ class ApplicationMenu: NSObject {
         menu.addItem(quitMenuItem)
         
         return menu
+    }
+    @objc func about(sender: NSMenuItem) {
+        NSApp.orderFrontStandardAboutPanel()
     }
     
     @objc func openLink(sender: NSMenuItem) {
