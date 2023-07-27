@@ -29,7 +29,7 @@ enum QuoteClassification: String, Codable, CaseIterable {
         case .wisdom:
             return "wisdom"
         case .everything:
-            return "all" // might need to be set to "everything"
+            return "all"
         }
     }
 }
