@@ -12,6 +12,8 @@ struct QuoteView: View {
     @State private var author: String? = nil
     @State private var fetching = false
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
+    
+    @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -42,10 +44,10 @@ struct QuoteView: View {
                         .lineLimit(nil)
                         .minimumScaleFactor(0.5)
                     Spacer()
-                            .frame(height: 5) // Adjust the height as needed
+                        .frame(height: 5) // Adjust the height as needed
                     Text(author ?? "Unknown Author")
                         .font(.system(size: 14))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(textColor) // Use the dynamic text color
                 }
                 .id(UUID())
             }
@@ -54,6 +56,18 @@ struct QuoteView: View {
         .padding()
         .task {
             await getQuote(quoteClassification.classification)
+        }
+        .environment(\.colorScheme, .dark) // Set the default color scheme to dark mode for testing
+    }
+    
+    // Compute the dynamic text color based on the color scheme
+    private var textColor: Color {
+        if colorScheme == .dark {
+            // Use white text for dark mode
+            return .white
+        } else {
+            // Use black text for light mode
+            return .black
         }
     }
     
