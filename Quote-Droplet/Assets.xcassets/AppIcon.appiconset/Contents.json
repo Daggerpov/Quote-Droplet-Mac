@@ -49,13 +49,13 @@
       "size" : "256x256"
     },
     {
-      "filename" : "mac512-1.png",
+      "filename" : "gotita-512 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "mac1024.png",
+      "filename" : "gotita-1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

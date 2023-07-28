@@ -14,7 +14,6 @@
 		DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146729DE696D00A950F6 /* QuoteClassification.swift */; };
 		DC60146A29DE860C00A950F6 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146929DE860B00A950F6 /* Quote.swift */; };
 		DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146B29DE8CF100A950F6 /* APIService.swift */; };
-		DCB420CB2A64A63400306D38 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCB420CA2A64A63400306D38 /* Kingfisher */; };
 		DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCB420CB2A64A63400306D38 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +100,6 @@
 			);
 			name = "Quote-Droplet";
 			packageProductDependencies = (
-				DCB420CA2A64A63400306D38 /* Kingfisher */,
 			);
 			productName = "Quote-Droplet";
 			productReference = DC60145529DE66C200A950F6 /* Quote-Droplet.app */;
@@ -133,7 +130,6 @@
 			);
 			mainGroup = DC60144C29DE66C200A950F6;
 			packageReferences = (
-				DCB420C92A64A63400306D38 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = DC60145629DE66C200A950F6 /* Products */;
 			projectDirPath = "";
@@ -302,6 +298,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Quote-Droplet/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -332,6 +329,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Quote-Droplet/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -368,25 +366,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		DCB420C92A64A63400306D38 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		DCB420CA2A64A63400306D38 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCB420C92A64A63400306D38 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC60144D29DE66C200A950F6 /* Project object */;
 }
