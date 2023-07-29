@@ -4,31 +4,30 @@
 
 1. Click on the latest release
 
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/43c8b7aa-13e9-4ffe-bcb5-72d8b7dee268)
+    <img width="200" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/8b7ad552-9df1-45ed-8fb4-52f1503c3ead">
 
 2. Click the top-most download
 
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/40a59e4f-57bb-450e-93e0-ec2cf8a81c64)
+    <img width="250" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/b3f48798-e23a-41c4-bcb0-0401812c5b31">
 
 3. If you're met with this warning, click the arrow -> click "Keep"
 
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/8b29959f-7287-4e3d-9635-f8c614ce162e)
-
-5. Open the zip file by simply clicking on it -> this will populate the following application:
-
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/dcef98e5-5b11-4cc5-8085-872a265f8f6c)
-
-6. Drag the application to your "Applications" folder
-
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/9e9055ed-d697-4557-a214-f3322e088ae0)
-
-7. Open the "Terminal" app and run the following command: `chmod +x /Applications/Quote-Droplet-v1.0.app/Contents/MacOS/Quote-Droplet`
+    <img width="499" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/a35d9fae-4a9c-421b-8b4a-aefbb028e061">
 
 
-8. Open the "Quote-Droplet" application by double-clicking on it -> Click "Open"
+4. Open the zip file by simply clicking on it -> this will populate the following application:
 
-    ![image](https://github.com/Daggerpov/Quote-Droplet/assets/53918934/066acba9-e4d9-4ace-8156-613ac4d3f5a2)
+    <img width="600" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/f187e337-55fd-4df4-87e6-8efba0253a0a">
 
+5. Drag the application to your "Applications" folder
+
+    <img width="150" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/e4274d3b-545d-4fb3-b4f3-53376d92f5cd">
+
+6. Open the "Terminal" app. You can do this by Spotlight Searching (Cmd+Space) for "Terminal". Then, run the following command: `chmod +x /Applications/Quote-Droplet.app/Contents/MacOS/Quote-Droplet`
+
+7. Open the "Quote-Droplet" application by double-clicking on it or Spotlight Searching -> Click "Open" if the following dialog pops up:
+
+    <img width="252" alt="image" src="https://github.com/Daggerpov/Quote-Droplet/assets/53918934/abf74751-26c5-45d5-b32e-67448d87be35">
 
 ## You should now see the following application in your menu bar: 
 
