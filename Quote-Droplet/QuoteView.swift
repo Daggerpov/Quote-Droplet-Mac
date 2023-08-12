@@ -30,7 +30,7 @@ struct QuoteView: View {
                             }
                         } label: {
                             Text(item.rawValue)
-                                .foregroundColor(item == quoteClassification ? .red : Color.primary)
+                                .foregroundColor(item == quoteClassification ? .blue : Color.primary)
                         }
                     }
                 }
@@ -43,6 +43,7 @@ struct QuoteView: View {
                         .font(.system(size: 20))
                         .lineLimit(nil)
                         .minimumScaleFactor(0.5)
+                        .foregroundColor(textColor) // Use the dynamic text color
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
                     Text(author ?? "Unknown Author")
@@ -57,6 +58,7 @@ struct QuoteView: View {
         .task {
             await getQuote(quoteClassification.classification)
         }
+        .background(backgroundColor) // Set the background color based on colorScheme
         .environment(\.colorScheme, .dark) // Set the default color scheme to dark mode for testing
     }
     
@@ -68,6 +70,17 @@ struct QuoteView: View {
         } else {
             // Use black text for light mode
             return .black
+        }
+    }
+    
+    // Compute the dynamic background color based on the color scheme
+    private var backgroundColor: Color {
+        if colorScheme == .dark {
+            // Use dark gray background for dark mode
+            return Color(white: 0.1)
+        } else {
+            // Use light gray background for light mode
+            return Color(white: 0.9)
         }
     }
     
