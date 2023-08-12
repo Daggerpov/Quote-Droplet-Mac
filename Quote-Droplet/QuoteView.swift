@@ -26,16 +26,33 @@ struct QuoteView: View {
         static let helperBundleID = "com.Daggerpov.Quote-Droplet"
     }
     
+    // Load the launchAtLogin value from UserDefaults
+    init() {
+        let defaults = UserDefaults.standard
+        _launchAtLogin = State(initialValue: defaults.bool(forKey: "launchAtLoginUserDefault"))
+    }
+    
+    @State private var isUpdatingLaunchAtLogin = false
+    @State private var updatedLaunchAtLogin = false
+    
     var body: some View {
         VStack {
-            Toggle(isOn: $launchAtLogin) {
-                Text(" Launch at Login")
+            ZStack {
+                Toggle(isOn: $launchAtLogin) {
+                    Text(" Launch at Login")
+                }
+                if isUpdatingLaunchAtLogin {
+                    ProgressView()
+                        .foregroundColor(.blue) 
+                        .padding(.trailing, 10)
+                }
             }
             HStack(alignment: .top) {
                 Image("QuoteDroplet")
                     .resizable()
                     .frame(width: 100, height: 100)
-                VStack {
+                Spacer()
+                VStack (alignment: .trailing) {
                     ForEach(QuoteClassification.allCases, id: \.self) { item in
                         Button {
                             quoteClassification = item
@@ -69,6 +86,24 @@ struct QuoteView: View {
                 .id(UUID())
             }
             Spacer()
+        }
+        .onChange(of: launchAtLogin) { newValue in
+            // Update the updatedLaunchAtLogin immediately
+            updatedLaunchAtLogin = newValue
+            
+            isUpdatingLaunchAtLogin = true
+            // Save the updated launchAtLogin value to UserDefaults
+            let defaults = UserDefaults.standard
+            defaults.set(newValue, forKey: "launchAtLoginUserDefault")
+            
+            // Update the launch at login setting
+            SMLoginItemSetEnabled(Constants.helperBundleID as CFString, newValue)
+            
+            // Set a delay to simulate an asynchronous process (replace this with the actual completion callback)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isUpdatingLaunchAtLogin = false
+                launchAtLogin = updatedLaunchAtLogin // Update launchAtLogin to reflect the latest value
+            }
         }
         .padding()
         .task {
