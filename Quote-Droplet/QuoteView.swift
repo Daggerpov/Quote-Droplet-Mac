@@ -21,8 +21,7 @@ struct QuoteView: View {
                     .resizable()
                     .frame(width: 100, height: 100)
                 VStack {
-                    ForEach(QuoteClassification.allCases, id: \.self) {
-                        item in
+                    ForEach(QuoteClassification.allCases, id: \.self) { item in
                         Button {
                             quoteClassification = item
                             Task {
@@ -30,7 +29,9 @@ struct QuoteView: View {
                             }
                         } label: {
                             Text(item.rawValue)
-                                .foregroundColor(item == quoteClassification ? .blue : Color.primary)
+                                .foregroundColor(item == quoteClassification ?
+                                    (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                    (colorScheme == .light ? .black : .primary))
                         }
                     }
                 }
@@ -76,13 +77,12 @@ struct QuoteView: View {
     // Compute the dynamic background color based on the color scheme
     private var backgroundColor: Color {
         if colorScheme == .dark {
-            // Use dark gray background for dark mode
-            return Color(white: 0.1)
+            return Color(red: 0.15, green: 0.1, blue: 0.05) // Dark wood color
         } else {
-            // Use light gray background for light mode
-            return Color(white: 0.9)
+            return Color(red: 0.6, green: 0.4, blue: 0.2) // Light wood color
         }
     }
+
     
     func getQuote(_ classification: String) async {
             fetching.toggle()

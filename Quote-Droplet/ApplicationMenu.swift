@@ -14,11 +14,13 @@ class ApplicationMenu: NSObject {
     func createMenu() -> NSMenu {
         let quoteView = QuoteView()
         
-        let topView = NSHostingController(rootView: quoteView)
-        topView.view.frame.size = CGSize(width: 225, height: 300)
+        let topView = NSHostingView(rootView: quoteView)
+        topView.frame.size = CGSize(width: 225, height: 300)
+        topView.wantsLayer = true
+        topView.layer?.backgroundColor = backgroundColor.cgColor
         
         let customMenuItem = NSMenuItem()
-        customMenuItem.view = topView.view
+        customMenuItem.view = topView
         
         
         menu.addItem(customMenuItem)
@@ -45,6 +47,18 @@ class ApplicationMenu: NSObject {
         
         return menu
     }
+    
+    // Compute the dynamic background color based on the color scheme
+    private var backgroundColor: NSColor {
+        if NSApp.effectiveAppearance.name == .darkAqua {
+            // Use dark wood background color for dark mode
+            return NSColor(red: 0.15, green: 0.1, blue: 0.05, alpha: 1.0)
+        } else {
+            // Use light wood background color for light mode
+            return NSColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+        }
+    }
+    
     @objc func about(sender: NSMenuItem) {
         NSApp.orderFrontStandardAboutPanel()
     }
