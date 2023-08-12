@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ServiceManagement
 
 struct QuoteView: View {
     @State private var quoteString = "No Quote Found"
@@ -14,9 +15,23 @@ struct QuoteView: View {
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
     
     @Environment(\.colorScheme) private var colorScheme
+    
+    @State private var launchAtLogin = false {
+        didSet {
+            SMLoginItemSetEnabled(Constants.helperBundleID as CFString, launchAtLogin)
+        }
+    }
+    
+    private struct Constants {
+        static let helperBundleID = "com.Daggerpov.Quote-Droplet"
+    }
+    
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
+            Toggle(isOn: $launchAtLogin) {
+                Text(" Launch at Login")
+            }
+            HStack(alignment: .top) {
                 Image("QuoteDroplet")
                     .resizable()
                     .frame(width: 100, height: 100)

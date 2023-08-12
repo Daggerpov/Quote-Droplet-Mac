@@ -15,7 +15,24 @@
 		DC60146A29DE860C00A950F6 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146929DE860B00A950F6 /* Quote.swift */; };
 		DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146B29DE8CF100A950F6 /* APIService.swift */; };
 		DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */; };
+		DCEAFF222A8809B300A27908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEAFF212A8809B300A27908 /* AppDelegate.swift */; };
+		DCEAFF2F2A880C8600A27908 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEAFF2E2A880C8600A27908 /* main.swift */; };
+		DCEAFF312A880DD400A27908 /* AutoLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCEAFF1F2A8809B300A27908 /* AutoLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DCEAFF342A880E0F00A27908 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEAFF332A880E0E00A27908 /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCEAFF302A880D9D00A27908 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				DCEAFF312A880DD400A27908 /* AutoLauncher.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DC60145529DE66C200A950F6 /* Quote Droplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quote Droplet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,10 +46,23 @@
 		DC60146B29DE8CF100A950F6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DCB420C82A64A14400306D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMenu.swift; sourceTree = "<group>"; };
+		DCEAFF1F2A8809B300A27908 /* AutoLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCEAFF212A8809B300A27908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCEAFF2A2A8809BD00A27908 /* AutoLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoLauncher.entitlements; sourceTree = "<group>"; };
+		DCEAFF2E2A880C8600A27908 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DCEAFF332A880E0E00A27908 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DC60145229DE66C200A950F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCEAFF342A880E0F00A27908 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCEAFF1C2A8809B300A27908 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,7 +76,9 @@
 			isa = PBXGroup;
 			children = (
 				DC60145729DE66C200A950F6 /* Quote-Droplet */,
+				DCEAFF202A8809B300A27908 /* AutoLauncher */,
 				DC60145629DE66C200A950F6 /* Products */,
+				DCEAFF322A880E0D00A27908 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				DC60145529DE66C200A950F6 /* Quote Droplet.app */,
+				DCEAFF1F2A8809B300A27908 /* AutoLauncher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +116,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DCEAFF202A8809B300A27908 /* AutoLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				DCEAFF212A8809B300A27908 /* AppDelegate.swift */,
+				DCEAFF2A2A8809BD00A27908 /* AutoLauncher.entitlements */,
+				DCEAFF2E2A880C8600A27908 /* main.swift */,
+			);
+			path = AutoLauncher;
+			sourceTree = "<group>";
+		};
+		DCEAFF322A880E0D00A27908 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCEAFF332A880E0E00A27908 /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +144,7 @@
 				DC60145129DE66C200A950F6 /* Sources */,
 				DC60145229DE66C200A950F6 /* Frameworks */,
 				DC60145329DE66C200A950F6 /* Resources */,
+				DCEAFF302A880D9D00A27908 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -103,6 +155,23 @@
 			);
 			productName = "Quote-Droplet";
 			productReference = DC60145529DE66C200A950F6 /* Quote Droplet.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCEAFF1E2A8809B300A27908 /* AutoLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCEAFF2B2A8809BD00A27908 /* Build configuration list for PBXNativeTarget "AutoLauncher" */;
+			buildPhases = (
+				DCEAFF1B2A8809B300A27908 /* Sources */,
+				DCEAFF1C2A8809B300A27908 /* Frameworks */,
+				DCEAFF1D2A8809B300A27908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AutoLauncher;
+			productName = AutoLauncher;
+			productReference = DCEAFF1F2A8809B300A27908 /* AutoLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,6 +186,9 @@
 				TargetAttributes = {
 					DC60145429DE66C200A950F6 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					DCEAFF1E2A8809B300A27908 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -136,6 +208,7 @@
 			projectRoot = "";
 			targets = (
 				DC60145429DE66C200A950F6 /* Quote Droplet */,
+				DCEAFF1E2A8809B300A27908 /* AutoLauncher */,
 			);
 		};
 /* End PBXProject section */
@@ -147,6 +220,13 @@
 			files = (
 				DC60146029DE66C400A950F6 /* Preview Assets.xcassets in Resources */,
 				DC60145D29DE66C400A950F6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCEAFF1D2A8809B300A27908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +243,15 @@
 				DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */,
 				DC60145B29DE66C300A950F6 /* QuoteView.swift in Sources */,
 				DC60145929DE66C300A950F6 /* Quote_DropletApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCEAFF1B2A8809B300A27908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCEAFF2F2A880C8600A27908 /* main.swift in Sources */,
+				DCEAFF222A8809B300A27908 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +396,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Daggerpov.Quote-Droplet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -340,9 +429,69 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Daggerpov.Quote-Droplet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DCEAFF2C2A8809BD00A27908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AutoLauncher/AutoLauncher.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GUW483PXY6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSBackgroundOnly = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Daggerpov.AutoLauncher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DCEAFF2D2A8809BD00A27908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AutoLauncher/AutoLauncher.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GUW483PXY6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSBackgroundOnly = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Daggerpov.AutoLauncher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -365,6 +514,15 @@
 			buildConfigurations = (
 				DC60146529DE66C400A950F6 /* Debug */,
 				DC60146629DE66C400A950F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCEAFF2B2A8809BD00A27908 /* Build configuration list for PBXNativeTarget "AutoLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCEAFF2C2A8809BD00A27908 /* Debug */,
+				DCEAFF2D2A8809BD00A27908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
