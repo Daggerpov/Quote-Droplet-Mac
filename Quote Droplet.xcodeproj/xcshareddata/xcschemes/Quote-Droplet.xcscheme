@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC60145429DE66C200A950F6"
-               BuildableName = "Quote-Droplet.app"
-               BlueprintName = "Quote-Droplet"
-               ReferencedContainer = "container:Quote-Droplet.xcodeproj">
+               BuildableName = "Quote Droplet.app"
+               BlueprintName = "Quote Droplet"
+               ReferencedContainer = "container:Quote Droplet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC60145429DE66C200A950F6"
-            BuildableName = "Quote-Droplet.app"
-            BlueprintName = "Quote-Droplet"
-            ReferencedContainer = "container:Quote-Droplet.xcodeproj">
+            BuildableName = "Quote Droplet.app"
+            BlueprintName = "Quote Droplet"
+            ReferencedContainer = "container:Quote Droplet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC60145429DE66C200A950F6"
-            BuildableName = "Quote-Droplet.app"
-            BlueprintName = "Quote-Droplet"
-            ReferencedContainer = "container:Quote-Droplet.xcodeproj">
+            BuildableName = "Quote Droplet.app"
+            BlueprintName = "Quote Droplet"
+            ReferencedContainer = "container:Quote Droplet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

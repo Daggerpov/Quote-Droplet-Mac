@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DC60145529DE66C200A950F6 /* Quote-Droplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quote-Droplet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC60145529DE66C200A950F6 /* Quote Droplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quote Droplet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote_DropletApp.swift; sourceTree = "<group>"; };
 		DC60145A29DE66C300A950F6 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		DC60145C29DE66C400A950F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		DC60145629DE66C200A950F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC60145529DE66C200A950F6 /* Quote-Droplet.app */,
+				DC60145529DE66C200A950F6 /* Quote Droplet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,9 +86,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DC60145429DE66C200A950F6 /* Quote-Droplet */ = {
+		DC60145429DE66C200A950F6 /* Quote Droplet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC60146429DE66C400A950F6 /* Build configuration list for PBXNativeTarget "Quote-Droplet" */;
+			buildConfigurationList = DC60146429DE66C400A950F6 /* Build configuration list for PBXNativeTarget "Quote Droplet" */;
 			buildPhases = (
 				DC60145129DE66C200A950F6 /* Sources */,
 				DC60145229DE66C200A950F6 /* Frameworks */,
@@ -98,11 +98,11 @@
 			);
 			dependencies = (
 			);
-			name = "Quote-Droplet";
+			name = "Quote Droplet";
 			packageProductDependencies = (
 			);
 			productName = "Quote-Droplet";
-			productReference = DC60145529DE66C200A950F6 /* Quote-Droplet.app */;
+			productReference = DC60145529DE66C200A950F6 /* Quote Droplet.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -120,7 +120,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DC60145029DE66C200A950F6 /* Build configuration list for PBXProject "Quote-Droplet" */;
+			buildConfigurationList = DC60145029DE66C200A950F6 /* Build configuration list for PBXProject "Quote Droplet" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -135,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DC60145429DE66C200A950F6 /* Quote-Droplet */,
+				DC60145429DE66C200A950F6 /* Quote Droplet */,
 			);
 		};
 /* End PBXProject section */
@@ -219,7 +219,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -273,7 +273,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -351,7 +351,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DC60145029DE66C200A950F6 /* Build configuration list for PBXProject "Quote-Droplet" */ = {
+		DC60145029DE66C200A950F6 /* Build configuration list for PBXProject "Quote Droplet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC60146229DE66C400A950F6 /* Debug */,
@@ -360,7 +360,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC60146429DE66C400A950F6 /* Build configuration list for PBXNativeTarget "Quote-Droplet" */ = {
+		DC60146429DE66C400A950F6 /* Build configuration list for PBXNativeTarget "Quote Droplet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC60146529DE66C400A950F6 /* Debug */,
