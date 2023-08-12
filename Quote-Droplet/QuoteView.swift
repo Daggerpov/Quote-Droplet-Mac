@@ -37,34 +37,40 @@ struct QuoteView: View {
     
     var body: some View {
         VStack {
-            ZStack {
-                Toggle(isOn: $launchAtLogin) {
-                    Text(" Launch at Login")
-                }
-                if isUpdatingLaunchAtLogin {
-                    ProgressView()
-                        .foregroundColor(.blue) 
-                        .padding(.trailing, 10)
-                }
-            }
-            HStack(alignment: .top) {
-                Image("QuoteDroplet")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                Spacer()
-                VStack (alignment: .trailing) {
-                    ForEach(QuoteClassification.allCases, id: \.self) { item in
-                        Button {
-                            quoteClassification = item
-                            Task {
-                                await getQuote(quoteClassification.classification)
-                            }
-                        } label: {
-                            Text(item.rawValue)
-                                .foregroundColor(item == quoteClassification ?
-                                    (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-                                    (colorScheme == .light ? .black : .primary))
+            VStack{
+                HStack(alignment: .top) {
+                    VStack {
+                        Toggle(isOn: $launchAtLogin) {
+                            Text("Auto Launch").font(.system(size: 12))
                         }
+                        if isUpdatingLaunchAtLogin {
+                            ProgressView()
+                                .foregroundColor(.blue)
+                                .padding(.trailing, 10)
+                        }
+                        Image("QuoteDroplet")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                    }
+                    .padding(.horizontal, 8)
+                    
+                    HStack (alignment: .top) {
+                        VStack (alignment: .trailing) {
+                            ForEach(QuoteClassification.allCases, id: \.self) { item in
+                                Button {
+                                    quoteClassification = item
+                                    Task {
+                                        await getQuote(quoteClassification.classification)
+                                    }
+                                } label: {
+                                    Text(item.rawValue)
+                                        .foregroundColor(item == quoteClassification ?
+                                                         (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                                            (colorScheme == .light ? .black : .primary))
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 8)
                     }
                 }
             }
@@ -77,15 +83,16 @@ struct QuoteView: View {
                         .lineLimit(nil)
                         .minimumScaleFactor(0.5)
                         .foregroundColor(textColor) // Use the dynamic text color
+                        .padding(.horizontal, 8)
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
                     Text(author ?? "Unknown Author")
                         .font(.system(size: 14))
                         .foregroundColor(textColor) // Use the dynamic text color
                 }
+                
                 .id(UUID())
             }
-            Spacer()
         }
         .onChange(of: launchAtLogin) { newValue in
             // Update the updatedLaunchAtLogin immediately
@@ -105,7 +112,7 @@ struct QuoteView: View {
                 launchAtLogin = updatedLaunchAtLogin // Update launchAtLogin to reflect the latest value
             }
         }
-        .padding()
+        .frame(minWidth: 250, idealWidth: 250, maxWidth: .infinity, minHeight: 250, idealHeight: 250, maxHeight: .infinity) // Adjust the frame sizes
         .task {
             await getQuote(quoteClassification.classification)
         }
@@ -135,40 +142,38 @@ struct QuoteView: View {
 
     
     func getQuote(_ classification: String) async {
+        fetching.toggle()
+        defer {
             fetching.toggle()
-            defer {
-                fetching.toggle()
-            }
-            do {
-                let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
-                    getRandomQuoteByClassification(classification: classification) { quote, error in
-                        continuation.resume(returning: (quote, error))
-                    }
-                }
-                
-                if let quote = quote {
-                    quoteString = quote.text
-                    author = quote.author // Assign the optional author name
-                } else {
-                    quoteString = "No Quote Found"
-                    author = nil // Reset the optional author name
-                }
-                
-                if let error = error {
-                    throw error
-                }
-            } catch {
-                quoteString = error.localizedDescription
-                author = nil // Reset the optional author name in case of an error
-            }
         }
-
-
+        do {
+            let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
+                getRandomQuoteByClassification(classification: classification) { quote, error in
+                    continuation.resume(returning: (quote, error))
+                }
+            }
+            
+            if let quote = quote {
+                quoteString = quote.text
+                author = quote.author // Assign the optional author name
+            } else {
+                quoteString = "No Quote Found"
+                author = nil // Reset the optional author name
+            }
+            
+            if let error = error {
+                throw error
+            }
+        } catch {
+            quoteString = error.localizedDescription
+            author = nil // Reset the optional author name in case of an error
+        }
+    }
 }
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
         QuoteView()
-            .frame(width: 225, height: 225)
+            .frame(width: 250, height: 250)
     }
 }

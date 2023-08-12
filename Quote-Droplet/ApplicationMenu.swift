@@ -15,13 +15,12 @@ class ApplicationMenu: NSObject {
         let quoteView = QuoteView()
         
         let topView = NSHostingView(rootView: quoteView)
-        topView.frame.size = CGSize(width: 225, height: 300)
+        topView.frame.size = CGSize(width: 250, height: 325)
         topView.wantsLayer = true
         topView.layer?.backgroundColor = backgroundColor.cgColor
         
         let customMenuItem = NSMenuItem()
         customMenuItem.view = topView
-        
         
         menu.addItem(customMenuItem)
         menu.addItem(NSMenuItem.separator())
