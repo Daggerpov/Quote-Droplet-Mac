@@ -85,33 +85,33 @@ struct QuoteView: View {
 
     
     func getQuote(_ classification: String) async {
+        fetching.toggle()
+        defer {
             fetching.toggle()
-            defer {
-                fetching.toggle()
-            }
-            do {
-                let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
-                    getRandomQuoteByClassification(classification: classification) { quote, error in
-                        continuation.resume(returning: (quote, error))
-                    }
-                }
-                
-                if let quote = quote {
-                    quoteString = quote.text
-                    author = quote.author // Assign the optional author name
-                } else {
-                    quoteString = "No Quote Found"
-                    author = nil // Reset the optional author name
-                }
-                
-                if let error = error {
-                    throw error
-                }
-            } catch {
-                quoteString = error.localizedDescription
-                author = nil // Reset the optional author name in case of an error
-            }
         }
+        do {
+            let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
+                getRandomQuoteByClassification(classification: classification) { quote, error in
+                    continuation.resume(returning: (quote, error))
+                }
+            }
+            
+            if let quote = quote {
+                quoteString = quote.text
+                author = quote.author // Assign the optional author name
+            } else {
+                quoteString = "No Quote Found"
+                author = nil // Reset the optional author name
+            }
+            
+            if let error = error {
+                throw error
+            }
+        } catch {
+            quoteString = error.localizedDescription
+            author = nil // Reset the optional author name in case of an error
+        }
+    }
 
 
 }
