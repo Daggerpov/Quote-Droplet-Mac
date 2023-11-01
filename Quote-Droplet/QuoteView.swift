@@ -17,11 +17,8 @@ struct QuoteView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Image("QuoteDroplet")
-                    .resizable()
-                    .frame(width: 100, height: 100)
                 VStack {
-                    ForEach(QuoteClassification.allCases, id: \.self) { item in
+                    ForEach(QuoteClassification.allCases.prefix(3), id: \.self) { item in
                         Button {
                             quoteClassification = item
                             Task {
@@ -29,13 +26,49 @@ struct QuoteView: View {
                             }
                         } label: {
                             Text(item.rawValue)
+                                .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
                                     (colorScheme == .light ? .black : .primary))
                         }
                     }
                 }
+                
+                VStack {
+                    ForEach(QuoteClassification.allCases.dropFirst(3).prefix(3), id: \.self) { item in
+                        Button {
+                            quoteClassification = item
+                            Task {
+                                await getQuote(quoteClassification.classification)
+                            }
+                        } label: {
+                            Text(item.rawValue)
+                                .font(.system(size: 11))
+                                .foregroundColor(item == quoteClassification ?
+                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+
+                                    (colorScheme == .light ? .black : .primary))
+                        }
+                    }
+                }
+                
+                VStack {
+                    Button {
+                        quoteClassification = .everything
+                        Task {
+                            await getQuote(quoteClassification.classification)
+                        }
+                    } label: {
+                        Text(QuoteClassification.everything.rawValue)
+                            .font(.system(size: 11))
+                            .foregroundColor(quoteClassification == .everything ?
+                                (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                (colorScheme == .light ? .black : .primary))
+                    }
+                }
             }
+            Spacer()
+
             if fetching {
                 ProgressView()
             } else {
@@ -47,7 +80,7 @@ struct QuoteView: View {
                         .foregroundColor(textColor) // Use the dynamic text color
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
-                    Text(author ?? "Unknown Author")
+                    Text(author ?? "") // Don't show author if blank
                         .font(.system(size: 14))
                         .foregroundColor(textColor) // Use the dynamic text color
                 }
@@ -98,7 +131,11 @@ struct QuoteView: View {
             
             if let quote = quote {
                 quoteString = quote.text
-                author = quote.author // Assign the optional author name
+                if quote.author == "Unknown Author" {
+                    author = nil // Leave the optional author name blank
+                } else {
+                    author = quote.author // Assign the author name
+                }
             } else {
                 quoteString = "No Quote Found"
                 author = nil // Reset the optional author name

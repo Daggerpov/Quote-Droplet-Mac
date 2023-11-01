@@ -14,6 +14,7 @@ enum QuoteClassification: String, Codable, CaseIterable {
     philosophy = "Philosophy",
     discipline = "Discipline",
     wisdom = "Wisdom",
+    upliftment = "Upliftment",
     everything = "All"
     
     var classification: String {
@@ -28,6 +29,8 @@ enum QuoteClassification: String, Codable, CaseIterable {
             return "discipline"
         case .wisdom:
             return "wisdom"
+        case .upliftment:
+            return "upliftment"
         case .everything:
             return "all"
         }
