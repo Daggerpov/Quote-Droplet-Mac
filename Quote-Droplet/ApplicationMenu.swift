@@ -11,11 +11,19 @@ import SwiftUI
 class ApplicationMenu: NSObject {
     let menu = NSMenu()
     
+    // Get the app version from the bundle
+    var versionNumber: String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "Unknown"
+        }
+        return version
+    }
+    
     func createMenu() -> NSMenu {
         let quoteView = QuoteView()
         
         let topView = NSHostingView(rootView: quoteView)
-        topView.frame.size = CGSize(width: 225, height: 300)
+        topView.frame.size = CGSize(width: 250, height: 300)
         topView.wantsLayer = true
         topView.layer?.backgroundColor = backgroundColor.cgColor
         
@@ -60,7 +68,17 @@ class ApplicationMenu: NSObject {
     }
     
     @objc func about(sender: NSMenuItem) {
-        NSApp.orderFrontStandardAboutPanel()
+        let aboutPanel = NSAlert()
+        aboutPanel.messageText = "About Quote Droplet"
+        aboutPanel.informativeText = """
+        Version \(versionNumber)
+        
+        If you want this app to automatically stay open, you can navigate to your System Settings -> General -> Login Items -> Click the "+" -> find Quote Droplet in your applications.
+
+        Be sure to also install Quote Droplet on your iPhone or iPad from the App Store.
+        """
+        aboutPanel.addButton(withTitle: "OK")
+        aboutPanel.runModal()
     }
     
     @objc func openLink(sender: NSMenuItem) {
