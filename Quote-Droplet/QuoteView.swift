@@ -53,17 +53,20 @@ struct QuoteView: View {
                 }
                 
                 VStack {
-                    Button {
-                        quoteClassification = .everything
-                        Task {
-                            await getQuote(quoteClassification.classification)
+                    ForEach(QuoteClassification.allCases.dropFirst(6).prefix(3), id: \.self) { item in
+                        Button {
+                            quoteClassification = item
+                            Task {
+                                await getQuote(quoteClassification.classification)
+                            }
+                        } label: {
+                            Text(item.rawValue)
+                                .font(.system(size: 11))
+                                .foregroundColor(item == quoteClassification ?
+                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+
+                                    (colorScheme == .light ? .black : .primary))
                         }
-                    } label: {
-                        Text(QuoteClassification.everything.rawValue)
-                            .font(.system(size: 11))
-                            .foregroundColor(quoteClassification == .everything ?
-                                (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-                                (colorScheme == .light ? .black : .primary))
                     }
                 }
             }
