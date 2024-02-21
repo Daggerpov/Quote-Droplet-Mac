@@ -76,6 +76,8 @@ class ApplicationMenu: NSObject {
         If you want this app to automatically stay open, you can navigate to your System Settings -> General -> Login Items -> Click the "+" -> find Quote Droplet in your applications.
 
         Be sure to also install Quote Droplet on your iPhone or iPad from the App Store.
+        
+        That app enables you to see quotes inside of an iOS widget and through push notifications.
         """
         aboutPanel.addButton(withTitle: "OK")
         aboutPanel.runModal()
