@@ -217,12 +217,17 @@ struct SubmitQuoteWindow: View {
                 .padding()
                 
                 Button("Submit") {
-                    guard let classification = selectedClassification else { // Change category to classification
-                        // Show an alert indicating category selection is required
+                    guard let classification = selectedClassification else {
+                        let alert = NSAlert()
+                        alert.messageText = "Error"
+                        alert.informativeText = "Please select a classification."
+                        alert.addButton(withTitle: "OK")
+                        alert.runModal()
                         return
                     }
-                    // Call the function to submit the quote
-                    addQuote(text: quoteText, author: author, classification: classification.classification) { success, error in
+                    
+                    // Call the addQuote function with the quote text, author, and classification
+                    addQuote(text: quoteText, author: author, classification: classification.rawValue) { success, error in
                         if success {
                             // Show success message
                             let alert = NSAlert()
@@ -238,6 +243,7 @@ struct SubmitQuoteWindow: View {
                             alert.addButton(withTitle: "OK")
                             alert.runModal()
                         } else {
+                            // Show unknown error message
                             let alert = NSAlert()
                             alert.messageText = "Unknown Error"
                             alert.informativeText = "An unknown error occurred."
@@ -245,6 +251,7 @@ struct SubmitQuoteWindow: View {
                             alert.runModal()
                         }
                     }
+                    
                     presentationMode.wrappedValue.dismiss()
                 }
                 .padding()
