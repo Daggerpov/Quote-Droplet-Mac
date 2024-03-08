@@ -10,7 +10,14 @@ import SwiftUI
 
 class ApplicationMenu: NSObject {
     let menu = NSMenu()
-    let submitQuoteWindowController = NSWindowController(window: nil) // Moved here
+    
+    var submitQuoteWindowController: NSWindowController? // Define submitQuoteWindowController here
+        
+    // Initialize submitQuoteWindowController in the constructor
+    override init() {
+        super.init()
+        submitQuoteWindowController = NSWindowController(window: nil)
+    }
 
     
     // Get the app version from the bundle
@@ -140,10 +147,26 @@ class ApplicationMenu: NSObject {
                 alert.runModal()
             }
         })
-        
-        if let window = NSApplication.shared.mainWindow {
-            window.beginSheet(submitQuoteWindowController.window!) { _ in }
-        }
+        // Create an NSWindow for SubmitQuoteWindow
+       let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 200),
+                             styleMask: [.titled, .closable],
+                             backing: .buffered,
+                             defer: false)
+       window.center()
+       window.contentView = NSHostingView(rootView: submitQuoteWindow)
+
+       if let submitQuoteWindowController = self.submitQuoteWindowController {
+           submitQuoteWindowController.window = window // Set the window property
+
+           if let mainWindow = NSApplication.shared.mainWindow {
+               mainWindow.beginSheet(window) { _ in
+                   // Cleanup if needed
+                   window.close()
+               }
+           }
+       } else {
+           print("Error: submitQuoteWindowController is not initialized")
+       }
 
     }
 
@@ -235,9 +258,8 @@ struct SubmitQuoteWindow: View {
 }
 
 
-
 struct SubmitQuoteWindow_Previews: PreviewProvider {
     static var previews: some View {
-        SubmitQuoteWindow( submitHandler: <#(String, String, QuoteClassification?) -> Void#>)
+        SubmitQuoteWindow(submitHandler: { _, _, _ in })
     }
 }
