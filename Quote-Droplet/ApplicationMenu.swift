@@ -205,6 +205,7 @@ struct SubmitQuoteWindow: View {
             Picker("Classification", selection: $selectedClassification) {
                 ForEach(QuoteClassification.allCases, id: \.self) { classification in
                     Text(classification.rawValue)
+                        .tag(classification) // Ensure that each classification is tagged with itself
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -217,17 +218,10 @@ struct SubmitQuoteWindow: View {
                 .padding()
                 
                 Button("Submit") {
-                    guard let classification = selectedClassification else {
-                        let alert = NSAlert()
-                        alert.messageText = "Error"
-                        alert.informativeText = "Please select a classification."
-                        alert.addButton(withTitle: "OK")
-                        alert.runModal()
-                        return
-                    }
+                    let classification = selectedClassification
                     
                     // Call the addQuote function with the quote text, author, and classification
-                    addQuote(text: quoteText, author: author, classification: classification.rawValue) { success, error in
+                    addQuote(text: quoteText, author: author, classification: classification?.rawValue ?? "all") { success, error in
                         if success {
                             // Show success message
                             let alert = NSAlert()
