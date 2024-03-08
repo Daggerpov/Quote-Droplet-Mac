@@ -162,8 +162,7 @@ struct SubmitQuoteWindow: View {
     
     @State private var quoteText = ""
     @State private var author = ""
-    @State private var selectedCategory: Category? = nil
-    var categories: [Category] = [] // Provide your categories here
+    @State private var selectedClassification: QuoteClassification? = nil // Change selectedCategory to selectedClassification
     
     var body: some View {
         VStack {
@@ -177,12 +176,11 @@ struct SubmitQuoteWindow: View {
             TextField("Author", text: $author)
                 .padding()
             
-            Picker("Classification", selection: $selectedCategory) {
+            Picker("Classification", selection: $selectedClassification) {
                 ForEach(QuoteClassification.allCases, id: \.self) { classification in
                     Text(classification.rawValue)
                 }
             }
-
             .pickerStyle(SegmentedPickerStyle())
             .padding()
             
@@ -193,13 +191,12 @@ struct SubmitQuoteWindow: View {
                 .padding()
                 
                 Button("Submit") {
-                    // Perform submission logic here
-                    guard let category = selectedCategory else {
+                    guard let classification = selectedClassification else { // Change category to classification
                         // Show an alert indicating category selection is required
                         return
                     }
                     // Call the function to submit the quote
-                    addQuote(text: quoteText, author: author, classification: category.rawValue.lowercased()) { success, error in
+                    addQuote(text: quoteText, author: author, classification: classification.classification) { success, error in
                         if success {
                             // Show success message
                             let alert = NSAlert()
@@ -232,6 +229,7 @@ struct SubmitQuoteWindow: View {
         .padding()
     }
 }
+
 
 
 struct SubmitQuoteWindow_Previews: PreviewProvider {
