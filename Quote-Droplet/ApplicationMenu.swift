@@ -147,27 +147,24 @@ class ApplicationMenu: NSObject {
                 alert.runModal()
             }
         })
-        // Create an NSWindow for SubmitQuoteWindow
-       let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 200),
-                             styleMask: [.titled, .closable],
-                             backing: .buffered,
-                             defer: false)
-       window.center()
-       window.contentView = NSHostingView(rootView: submitQuoteWindow)
+        
+        // Present the submit quote window
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
+                               styleMask: [.titled, .closable, .resizable],
+                               backing: .buffered,
+                               defer: false)
+        window.center()
+        window.contentView = NSHostingView(rootView: submitQuoteWindow)
 
-       if let submitQuoteWindowController = self.submitQuoteWindowController {
-           submitQuoteWindowController.window = window // Set the window property
-
-           if let mainWindow = NSApplication.shared.mainWindow {
-               mainWindow.beginSheet(window) { _ in
-                   // Cleanup if needed
-                   window.close()
-               }
-           }
-       } else {
-           print("Error: submitQuoteWindowController is not initialized")
-       }
-
+        if let mainWindow = NSApplication.shared.mainWindow {
+            mainWindow.beginSheet(window) { _ in
+                // Cleanup if needed
+                window.close()
+            }
+        } else {
+            // If main window is not available, just order front the window
+            window.makeKeyAndOrderFront(nil)
+        }
     }
 
 
