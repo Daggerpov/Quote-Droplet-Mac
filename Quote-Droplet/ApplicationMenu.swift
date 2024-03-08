@@ -10,6 +10,8 @@ import SwiftUI
 
 class ApplicationMenu: NSObject {
     let menu = NSMenu()
+    let submitQuoteWindowController = NSWindowController(window: nil) // Moved here
+
     
     // Get the app version from the bundle
     var versionNumber: String {
@@ -102,10 +104,10 @@ class ApplicationMenu: NSObject {
     }
     
     @objc func submitQuote(sender: NSMenuItem) {
-        let submitQuoteWindow = SubmitQuoteWindow(submitHandler: { quoteText, author, category in
+        let submitQuoteWindow = SubmitQuoteWindow(submitHandler: { quoteText, author, classification in
             if !quoteText.isEmpty && !author.isEmpty {
                 // Call the global function addQuote to submit the quote
-                addQuote(text: quoteText, author: author, classification: category.rawValue.lowercased()) { success, error in
+                addQuote(text: quoteText, author: author, classification: classification?.classification ?? "all") { success, error in
                     if success {
                         // Show success message using SwiftUI alert
                         let alert = NSAlert()
@@ -140,8 +142,9 @@ class ApplicationMenu: NSObject {
         })
         
         if let window = NSApplication.shared.mainWindow {
-            window.beginSheet(submitQuoteWindow) { _ in }
+            window.beginSheet(submitQuoteWindowController.window!) { _ in }
         }
+
     }
 
 
@@ -162,7 +165,8 @@ struct SubmitQuoteWindow: View {
     
     @State private var quoteText = ""
     @State private var author = ""
-    @State private var selectedClassification: QuoteClassification? = nil // Change selectedCategory to selectedClassification
+    @State private var selectedClassification: QuoteClassification? = nil
+    let submitHandler: (String, String, QuoteClassification?) -> Void // Add this line
     
     var body: some View {
         VStack {
@@ -234,6 +238,6 @@ struct SubmitQuoteWindow: View {
 
 struct SubmitQuoteWindow_Previews: PreviewProvider {
     static var previews: some View {
-        SubmitQuoteWindow()
+        SubmitQuoteWindow( submitHandler: <#(String, String, QuoteClassification?) -> Void#>)
     }
 }
