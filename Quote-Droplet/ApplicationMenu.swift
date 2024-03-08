@@ -34,6 +34,14 @@ class ApplicationMenu: NSObject {
         menu.addItem(customMenuItem)
         menu.addItem(NSMenuItem.separator())
         
+        // Add "Submit a Quote" menu item
+        let submitQuoteMenuItem = NSMenuItem(title: "Submit a Quote",
+                                             action: #selector(submitQuote),
+                                             keyEquivalent: "")
+        submitQuoteMenuItem.target = self
+        menu.addItem(submitQuoteMenuItem)
+        
+        
         let aboutMenuItem = NSMenuItem(title: "About Quote Droplet",
                                        action: #selector(about),
                                        keyEquivalent: "")
@@ -91,5 +99,143 @@ class ApplicationMenu: NSObject {
     
     @objc func quit(sender: NSMenuItem) {
         NSApp.terminate(self)
+    }
+    
+    @objc func submitQuote(sender: NSMenuItem) {
+        let submitQuoteWindow = SubmitQuoteWindow(submitHandler: { quoteText, author, category in
+            if !quoteText.isEmpty && !author.isEmpty {
+                // Call the global function addQuote to submit the quote
+                addQuote(text: quoteText, author: author, classification: category.rawValue.lowercased()) { success, error in
+                    if success {
+                        // Show success message using SwiftUI alert
+                        let alert = NSAlert()
+                        alert.messageText = "Submission Received"
+                        alert.informativeText = "Thanks for submitting a quote. It is now awaiting approval to be added to this app's quote database."
+                        alert.addButton(withTitle: "OK")
+                        alert.runModal()
+                    } else if let error = error {
+                        // Show error message using SwiftUI alert
+                        let alert = NSAlert()
+                        alert.messageText = "Submission Error"
+                        alert.informativeText = error.localizedDescription
+                        alert.addButton(withTitle: "OK")
+                        alert.runModal()
+                    } else {
+                        // Show unknown error message using SwiftUI alert
+                        let alert = NSAlert()
+                        alert.messageText = "Unknown Error"
+                        alert.informativeText = "An unknown error occurred."
+                        alert.addButton(withTitle: "OK")
+                        alert.runModal()
+                    }
+                }
+            } else {
+                // Show error message if quote text or author is empty using SwiftUI alert
+                let alert = NSAlert()
+                alert.messageText = "Error"
+                alert.informativeText = "Please enter both quote text and author."
+                alert.addButton(withTitle: "OK")
+                alert.runModal()
+            }
+        })
+        
+        if let window = NSApplication.shared.mainWindow {
+            window.beginSheet(submitQuoteWindow) { _ in }
+        }
+    }
+
+
+    // Method to display submission alert
+    func showSubmissionAlert(message: String) {
+        let alert = NSAlert()
+        alert.messageText = "Submission Received"
+        alert.informativeText = message
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+    }
+
+}
+
+
+struct SubmitQuoteWindow: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var quoteText = ""
+    @State private var author = ""
+    @State private var selectedCategory: Category? = nil
+    var categories: [Category] = [] // Provide your categories here
+    
+    var body: some View {
+        VStack {
+            Text("Submit Quote")
+                .font(.title)
+                .padding()
+            
+            TextField("Quote Text", text: $quoteText)
+                .padding()
+            
+            TextField("Author", text: $author)
+                .padding()
+            
+            Picker("Classification", selection: $selectedCategory) {
+                ForEach(QuoteClassification.allCases, id: \.self) { classification in
+                    Text(classification.rawValue)
+                }
+            }
+
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
+            HStack {
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .padding()
+                
+                Button("Submit") {
+                    // Perform submission logic here
+                    guard let category = selectedCategory else {
+                        // Show an alert indicating category selection is required
+                        return
+                    }
+                    // Call the function to submit the quote
+                    addQuote(text: quoteText, author: author, classification: category.rawValue.lowercased()) { success, error in
+                        if success {
+                            // Show success message
+                            let alert = NSAlert()
+                            alert.messageText = "Submission Received"
+                            alert.informativeText = "Thanks for submitting a quote. It is now awaiting approval to be added to this app's quote database."
+                            alert.addButton(withTitle: "OK")
+                            alert.runModal()
+                        } else if let error = error {
+                            // Show error message
+                            let alert = NSAlert()
+                            alert.messageText = "Submission Error"
+                            alert.informativeText = error.localizedDescription
+                            alert.addButton(withTitle: "OK")
+                            alert.runModal()
+                        } else {
+                            // Show unknown error message
+                            let alert = NSAlert()
+                            alert.messageText = "Unknown Error"
+                            alert.informativeText = "An unknown error occurred."
+                            alert.addButton(withTitle: "OK")
+                            alert.runModal()
+                        }
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .padding()
+            }
+        }
+        .frame(width: 300, height: 200)
+        .padding()
+    }
+}
+
+
+struct SubmitQuoteWindow_Previews: PreviewProvider {
+    static var previews: some View {
+        SubmitQuoteWindow()
     }
 }
