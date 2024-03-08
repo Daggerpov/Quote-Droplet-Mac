@@ -149,7 +149,7 @@ class ApplicationMenu: NSObject {
         })
         
         // Present the submit quote window
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 600, height: 500), // Adjusted size
                                styleMask: [.titled, .closable, .resizable],
                                backing: .buffered,
                                defer: false)
@@ -194,7 +194,9 @@ struct SubmitQuoteWindow: View {
                 .font(.title)
                 .padding()
             
+            // Adjust height of TextField
             TextField("Quote Text", text: $quoteText)
+                .frame(maxWidth: .infinity, minHeight: 100) // Adjusted height
                 .padding()
             
             TextField("Author", text: $author)
@@ -236,7 +238,6 @@ struct SubmitQuoteWindow: View {
                             alert.addButton(withTitle: "OK")
                             alert.runModal()
                         } else {
-                            // Show unknown error message
                             let alert = NSAlert()
                             alert.messageText = "Unknown Error"
                             alert.informativeText = "An unknown error occurred."
@@ -249,7 +250,7 @@ struct SubmitQuoteWindow: View {
                 .padding()
             }
         }
-        .frame(width: 300, height: 200)
+        .frame(width: 500, height: 400) // Adjusted initial size
         .padding()
     }
 }
