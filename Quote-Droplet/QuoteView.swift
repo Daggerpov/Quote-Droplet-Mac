@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct QuoteView: View {
+    
+    
     @State private var quoteString = "No Quote Found"
     @State private var author: String? = nil
     @State private var fetching = false
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
     
     @Environment(\.colorScheme) private var colorScheme
+    let quotes: [QuoteJSON] // Add quotes as a parameter
+    
+    init(quotes: [QuoteJSON]) { // Initialize QuoteView with quotes
+        self.quotes = quotes
+    }
+
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -118,47 +126,43 @@ struct QuoteView: View {
             return Color(red: 0.6, green: 0.4, blue: 0.2) // Light wood color
         }
     }
-
     
     func getQuote(_ classification: String) async {
-        fetching.toggle()
-        defer {
-            fetching.toggle()
-        }
-        do {
-            let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
-                getRandomQuoteByClassification(classification: classification) { quote, error in
-                    continuation.resume(returning: (quote, error))
-                }
-            }
-            
-            if let quote = quote {
-                quoteString = quote.text
-                if quote.author == "Unknown Author" {
-                    author = nil // Leave the optional author name blank
-                } else {
-                    author = quote.author // Assign the author name
-                }
-            } else {
+        if classification.lowercased() == "all" {
+            guard let randomQuote = quotes.randomElement() else {
                 quoteString = "No Quote Found"
-                author = nil // Reset the optional author name
+                author = nil
+                return
             }
-            
-            if let error = error {
-                throw error
+            // Assign the quote and author
+            quoteString = randomQuote.text
+            author = randomQuote.author == "Unknown Author" ? nil : randomQuote.author
+        } else {
+            // Fetch a random quote with the specified classification
+            let filteredQuotes = quotes.filter { $0.classification.lowercased() == classification.lowercased() }
+            guard let randomQuote = filteredQuotes.randomElement() else {
+                quoteString = "No Quote Found"
+                author = nil
+                return
             }
-        } catch {
-            quoteString = error.localizedDescription
-            author = nil // Reset the optional author name in case of an error
+
+            // Assign the quote and author
+            quoteString = randomQuote.text
+            author = randomQuote.author == "Unknown Author" ? nil : randomQuote.author
         }
     }
-
 
 }
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteView()
+        let sampleQuotes: [QuoteJSON] = [
+            QuoteJSON(id: 102, text: "Do it or do not do it—you will regret both.", author: "Soren Kierkegaard", classification: "wisdom"),
+            QuoteJSON(id: 163, text: "I can see the sun, but even if I cannot see the sun, I know that it exists. And to know that the sun is there—that is living.", author: "Fyodor Dostoyevsky", classification: "upliftment"),
+            
+        ]
+        
+        return QuoteView(quotes: sampleQuotes)
             .frame(width: 225, height: 225)
     }
 }

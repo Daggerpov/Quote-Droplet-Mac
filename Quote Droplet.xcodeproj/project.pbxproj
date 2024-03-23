@@ -14,6 +14,8 @@
 		DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146729DE696D00A950F6 /* QuoteClassification.swift */; };
 		DC60146A29DE860C00A950F6 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146929DE860B00A950F6 /* Quote.swift */; };
 		DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60146B29DE8CF100A950F6 /* APIService.swift */; };
+		DC9573572BAE707D000A3645 /* QuoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9573562BAE707D000A3645 /* QuoteManager.swift */; };
+		DC9573592BAE70A9000A3645 /* QuotesBackup.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9573582BAE70A9000A3645 /* QuotesBackup.json */; };
 		DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		DC60146729DE696D00A950F6 /* QuoteClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteClassification.swift; sourceTree = "<group>"; };
 		DC60146929DE860B00A950F6 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		DC60146B29DE8CF100A950F6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		DC9573562BAE707D000A3645 /* QuoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteManager.swift; sourceTree = "<group>"; };
+		DC9573582BAE70A9000A3645 /* QuotesBackup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = QuotesBackup.json; sourceTree = "<group>"; };
 		DCB420C82A64A14400306D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +75,8 @@
 				DC60146B29DE8CF100A950F6 /* APIService.swift */,
 				DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */,
 				DC60145E29DE66C400A950F6 /* Preview Content */,
+				DC9573562BAE707D000A3645 /* QuoteManager.swift */,
+				DC9573582BAE70A9000A3645 /* QuotesBackup.json */,
 			);
 			path = "Quote-Droplet";
 			sourceTree = "<group>";
@@ -147,6 +153,7 @@
 			files = (
 				DC60146029DE66C400A950F6 /* Preview Assets.xcassets in Resources */,
 				DC60145D29DE66C400A950F6 /* Assets.xcassets in Resources */,
+				DC9573592BAE70A9000A3645 /* QuotesBackup.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +167,7 @@
 				DC60146A29DE860C00A950F6 /* Quote.swift in Sources */,
 				DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */,
 				DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */,
+				DC9573572BAE707D000A3645 /* QuoteManager.swift in Sources */,
 				DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */,
 				DC60145B29DE66C300A950F6 /* QuoteView.swift in Sources */,
 				DC60145929DE66C300A950F6 /* Quote_DropletApp.swift in Sources */,
@@ -223,7 +231,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -281,7 +289,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -299,7 +307,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Quote-Droplet/Quote_Droplet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.4;
+				CURRENT_PROJECT_VERSION = 2.5;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Quote-Droplet/Preview Content\"";
 				DEVELOPMENT_TEAM = GUW483PXY6;
@@ -316,7 +324,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Daggerpov.Quote-Droplet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -333,7 +341,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Quote-Droplet/Quote_Droplet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.4;
+				CURRENT_PROJECT_VERSION = 2.5;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Quote-Droplet/Preview Content\"";
 				DEVELOPMENT_TEAM = GUW483PXY6;
@@ -350,7 +358,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Daggerpov.Quote-Droplet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -13,11 +13,33 @@ class ApplicationMenu: NSObject {
     
     var submitQuoteWindowController: NSWindowController? // Define submitQuoteWindowController here
         
+    // Add a property to hold all quotes
+    var allQuotes: [QuoteJSON] = []
+    
     // Initialize submitQuoteWindowController in the constructor
     override init() {
         super.init()
         submitQuoteWindowController = NSWindowController(window: nil)
+        
+        // Load quotes from JSON
+        loadQuotesFromJSON()
     }
+    
+    // Method to load quotes from JSON
+        func loadQuotesFromJSON() {
+            guard let path = Bundle.main.path(forResource: "QuotesBackup", ofType: "json") else {
+                print("Error: Unable to locate QuotesBackup.json")
+                return
+            }
+            
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                allQuotes = try decoder.decode([QuoteJSON].self, from: data)
+            } catch {
+                print("Error decoding QuotesBackup JSON: \(error.localizedDescription)")
+            }
+        }
 
     
     // Get the app version from the bundle
@@ -29,7 +51,7 @@ class ApplicationMenu: NSObject {
     }
     
     func createMenu() -> NSMenu {
-        let quoteView = QuoteView()
+        let quoteView = QuoteView(quotes: allQuotes)
         
         let topView = NSHostingView(rootView: quoteView)
         topView.frame.size = CGSize(width: 250, height: 300)
