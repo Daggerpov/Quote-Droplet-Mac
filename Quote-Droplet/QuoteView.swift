@@ -9,39 +9,36 @@ import SwiftUI
 import ServiceManagement
 
 struct QuoteView: View {
+    
+    
     @State private var quoteString = "No Quote Found"
     @State private var author: String? = nil
     @State private var fetching = false
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
     
     @Environment(\.colorScheme) private var colorScheme
+    let quotes: [QuoteJSON] // Add quotes as a parameter
     
-    @State private var launchAtLogin = false {
-        didSet {
-            SMLoginItemSetEnabled(Constants.helperBundleID as CFString, launchAtLogin)
-        }
+    init(quotes: [QuoteJSON]) { // Initialize QuoteView with quotes
+        self.quotes = quotes
     }
-    
-    private struct Constants {
-        static let helperBundleID = "com.Daggerpov.Quote-Droplet"
-    }
-    
-    // Load the launchAtLogin value from UserDefaults
-    init() {
-        let defaults = UserDefaults.standard
-        _launchAtLogin = State(initialValue: defaults.bool(forKey: "launchAtLoginUserDefault"))
-    }
-    
-    @State private var isUpdatingLaunchAtLogin = false
-    @State private var updatedLaunchAtLogin = false
-    
+
     var body: some View {
         VStack {
-            VStack{
-                HStack(alignment: .top) {
-                    VStack {
-                        Toggle(isOn: $launchAtLogin) {
-                            Text("Auto Launch").font(.system(size: 12))
+            HStack(alignment: .center) {
+                VStack {
+                    ForEach(QuoteClassification.allCases.prefix(3), id: \.self) { item in
+                        Button {
+                            quoteClassification = item
+                            Task {
+                                await getQuote(quoteClassification.classification)
+                            }
+                        } label: {
+                            Text(item.rawValue)
+                                .font(.system(size: 11))
+                                .foregroundColor(item == quoteClassification ?
+                                    (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                    (colorScheme == .light ? .black : .primary))
                         }
                         if isUpdatingLaunchAtLogin {
                             ProgressView()
@@ -73,7 +70,45 @@ struct QuoteView: View {
                         .padding(.horizontal, 8)
                     }
                 }
+                
+                VStack {
+                    ForEach(QuoteClassification.allCases.dropFirst(3).prefix(3), id: \.self) { item in
+                        Button {
+                            quoteClassification = item
+                            Task {
+                                await getQuote(quoteClassification.classification)
+                            }
+                        } label: {
+                            Text(item.rawValue)
+                                .font(.system(size: 11))
+                                .foregroundColor(item == quoteClassification ?
+                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+
+                                    (colorScheme == .light ? .black : .primary))
+                        }
+                    }
+                }
+                
+                VStack {
+                    ForEach(QuoteClassification.allCases.dropFirst(6).prefix(3), id: \.self) { item in
+                        Button {
+                            quoteClassification = item
+                            Task {
+                                await getQuote(quoteClassification.classification)
+                            }
+                        } label: {
+                            Text(item.rawValue)
+                                .font(.system(size: 11))
+                                .foregroundColor(item == quoteClassification ?
+                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+
+                                    (colorScheme == .light ? .black : .primary))
+                        }
+                    }
+                }
             }
+            Spacer()
+
             if fetching {
                 ProgressView()
             } else {
@@ -86,7 +121,7 @@ struct QuoteView: View {
                         .padding(.horizontal, 8)
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
-                    Text(author ?? "Unknown Author")
+                    Text(author ?? "") // Don't show author if blank
                         .font(.system(size: 14))
                         .foregroundColor(textColor) // Use the dynamic text color
                 }
@@ -139,41 +174,43 @@ struct QuoteView: View {
             return Color(red: 0.6, green: 0.4, blue: 0.2) // Light wood color
         }
     }
-
     
     func getQuote(_ classification: String) async {
-        fetching.toggle()
-        defer {
-            fetching.toggle()
-        }
-        do {
-            let (quote, error) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Quote?, Error?), Error>) -> Void in
-                getRandomQuoteByClassification(classification: classification) { quote, error in
-                    continuation.resume(returning: (quote, error))
-                }
-            }
-            
-            if let quote = quote {
-                quoteString = quote.text
-                author = quote.author // Assign the optional author name
-            } else {
+        if classification.lowercased() == "all" {
+            guard let randomQuote = quotes.randomElement() else {
                 quoteString = "No Quote Found"
-                author = nil // Reset the optional author name
+                author = nil
+                return
             }
-            
-            if let error = error {
-                throw error
+            // Assign the quote and author
+            quoteString = randomQuote.text
+            author = randomQuote.author == "Unknown Author" ? nil : randomQuote.author
+        } else {
+            // Fetch a random quote with the specified classification
+            let filteredQuotes = quotes.filter { $0.classification.lowercased() == classification.lowercased() }
+            guard let randomQuote = filteredQuotes.randomElement() else {
+                quoteString = "No Quote Found"
+                author = nil
+                return
             }
-        } catch {
-            quoteString = error.localizedDescription
-            author = nil // Reset the optional author name in case of an error
+
+            // Assign the quote and author
+            quoteString = randomQuote.text
+            author = randomQuote.author == "Unknown Author" ? nil : randomQuote.author
         }
     }
+
 }
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteView()
-            .frame(width: 250, height: 250)
+        let sampleQuotes: [QuoteJSON] = [
+            QuoteJSON(id: 102, text: "Do it or do not do it—you will regret both.", author: "Soren Kierkegaard", classification: "wisdom"),
+            QuoteJSON(id: 163, text: "I can see the sun, but even if I cannot see the sun, I know that it exists. And to know that the sun is there—that is living.", author: "Fyodor Dostoyevsky", classification: "upliftment"),
+            
+        ]
+        
+        return QuoteView(quotes: sampleQuotes)
+            .frame(width: 225, height: 225)
     }
 }
