@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct QuoteView: View {
-    
-    
     @State private var quoteString = "No Quote Found"
     @State private var author: String? = nil
     @State private var fetching = false
@@ -25,56 +23,15 @@ struct QuoteView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                VStack {
-                    ForEach(QuoteClassification.allCases.prefix(3), id: \.self) { item in
-                        Button {
-                            quoteClassification = item
-                            Task {
-                                await getQuote(quoteClassification.classification)
-                            }
-                        } label: {
-                            Text(item.rawValue)
-                                .font(.system(size: 11))
-                                .foregroundColor(item == quoteClassification ?
-                                    (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-                                    (colorScheme == .light ? .black : .primary))
-                        }
+                Picker("", selection: $quoteClassification) {
+                    ForEach(QuoteClassification.allCases, id: \.self) { item in
+                        Text(item.rawValue).tag(item)
                     }
                 }
-                
-                VStack {
-                    ForEach(QuoteClassification.allCases.dropFirst(3).prefix(3), id: \.self) { item in
-                        Button {
-                            quoteClassification = item
-                            Task {
-                                await getQuote(quoteClassification.classification)
-                            }
-                        } label: {
-                            Text(item.rawValue)
-                                .font(.system(size: 11))
-                                .foregroundColor(item == quoteClassification ?
-                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-
-                                    (colorScheme == .light ? .black : .primary))
-                        }
-                    }
-                }
-                
-                VStack {
-                    ForEach(QuoteClassification.allCases.dropFirst(6).prefix(3), id: \.self) { item in
-                        Button {
-                            quoteClassification = item
-                            Task {
-                                await getQuote(quoteClassification.classification)
-                            }
-                        } label: {
-                            Text(item.rawValue)
-                                .font(.system(size: 11))
-                                .foregroundColor(item == quoteClassification ?
-                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-
-                                    (colorScheme == .light ? .black : .primary))
-                        }
+                .pickerStyle(MenuPickerStyle())
+                Button("Get Quote") {
+                    Task {
+                        await getQuote(quoteClassification.classification)
                     }
                 }
             }
