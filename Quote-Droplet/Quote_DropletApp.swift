@@ -27,6 +27,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem.button?.image = NSImage(named: NSImage.Name("QuoteDropletSmall"))
         statusBarItem.button?.imagePosition = .imageLeading
         statusBarItem.menu = menu.createMenu()
+        
+        // auto-start:
+        
+        let mainAppIdentifier = "com.Daggerpov.Quote-Droplet"
+        let runningApps = NSWorkspace.shared.runningApplications
+        let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
+        
+        
+        if !isRunning {
+            var pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
+            pathComponents.removeLast()
+            pathComponents.removeLast()
+            pathComponents.removeLast()
+            pathComponents.removeLast()
+            let newPath = NSString.path(withComponents: pathComponents)
+            
+            NSWorkspace.shared.launchApplication(newPath)
+        }
     }
 }
 
