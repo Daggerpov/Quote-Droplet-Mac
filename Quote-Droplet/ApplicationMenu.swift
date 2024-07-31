@@ -75,16 +75,23 @@ class ApplicationMenu: NSObject {
         
         let aboutMenuItem = NSMenuItem(title: "About Quote Droplet",
                                        action: #selector(about),
-                                       keyEquivalent: "")
+                                       keyEquivalent: "a")
         aboutMenuItem.target = self
         menu.addItem(aboutMenuItem)
         
         let webLinkMenuItem = NSMenuItem(title: "Visit my GitHub",
                                          action: #selector(openLink),
-                                         keyEquivalent: "")
+                                         keyEquivalent: "g")
         webLinkMenuItem.target = self
         webLinkMenuItem.representedObject = "https://github.com/Daggerpov"
         menu.addItem(webLinkMenuItem)
+        
+        let donateMenuItem = NSMenuItem(title: "Donate",
+                                         action: #selector(openLink),
+                                         keyEquivalent: "d")
+        donateMenuItem.target = self
+//        donateMenuItem.representedObject = "https://github.com/Daggerpov"
+        menu.addItem(donateMenuItem)
         
         let quitMenuItem = NSMenuItem(title: "Quit",
                                       action: #selector(quit),
@@ -128,9 +135,16 @@ class ApplicationMenu: NSObject {
         NSWorkspace.shared.open(url)
     }
     
+    @objc func openLink(sender: NSMenuItem) {
+        let link = sender.representedObject as! String
+        guard let url = URL(string: link) else { return }
+        NSWorkspace.shared.open(url)
+    }
+    
     @objc func quit(sender: NSMenuItem) {
         NSApp.terminate(self)
     }
+}
     
     //    @objc func submitQuote(sender: NSMenuItem) {
     //        let submitQuoteWindow = SubmitQuoteWindow(submitHandler: { quoteText, author, classification in
@@ -198,8 +212,6 @@ class ApplicationMenu: NSObject {
     //        alert.addButton(withTitle: "OK")
     //        alert.runModal()
     //    }
-    
-}
 
 //
 //struct SubmitQuoteWindow: View {
