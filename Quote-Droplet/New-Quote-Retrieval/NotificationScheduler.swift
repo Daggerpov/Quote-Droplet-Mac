@@ -15,7 +15,6 @@ let notificationPermissionKey = "notificationPermissionGranted"
 let notificationToggleKey = "notificationToggleEnabled"
 private var scheduledNotificationIDs: Set<String> = Set() // for the quotes shown already
 
-@available(iOS 15, *)
 class NotificationScheduler {
     static let shared = NotificationScheduler()
     
@@ -47,11 +46,6 @@ class NotificationScheduler {
     }
     
     func scheduleNotifications(notificationTime: Date, quoteCategory: QuoteCategory, defaults: Bool) {
-        // if given defaults -> don't want to overrite selections.
-        
-        // if not given defaults, so real selections, overwrite so that if default
-        // notification scheduler gets called, that's what it'll use.
-        
         if defaults == false {
             NotificationScheduler.previouslySelectedNotificationTime = notificationTime
             NotificationScheduler.previouslySelectedNotificationCategory = quoteCategory
@@ -62,6 +56,12 @@ class NotificationScheduler {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         let classification = quoteCategory.displayName
+        
+        // Create notification content
+        let content = UNMutableNotificationContent()
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "sound-for-noti-water-drip-pixabay.mp3"))
+        
+        let shortQuotes = quotes.filter { $0.text.count <= 100 }
         
         // Create a calendar instance
         let calendar = Calendar.current
@@ -75,12 +75,6 @@ class NotificationScheduler {
             var triggerDate = calendar.dateComponents([.hour, .minute], from: notificationTime)
             triggerDate.day = calendar.component(.day, from: currentDate) + i
             
-            // Create notification content
-            let content = UNMutableNotificationContent()
-            
-            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "sound-for-noti-water-drip-pixabay.mp3"))
-            
-            let shortQuotes = quotes.filter{ $0.text.count <= 100 }
             
             // Fetch a random quote for the specified classification
             var randomQuote: QuoteJSON
@@ -92,7 +86,6 @@ class NotificationScheduler {
                 randomQuote = randomElement
                 content.title = "Quote Droplet"
             } else {
-                // Fetch a random quote with the specified classification
                 let filteredQuotes = shortQuotes.filter { $0.classification.lowercased() == classification.lowercased() }
                 guard let randomElement = filteredQuotes.randomElement() else {
                     print("Error: Unable to retrieve a random quote.")
@@ -102,15 +95,16 @@ class NotificationScheduler {
                 content.title = "Quote Droplet: \(classification)"
             }
             
-            //adjusted
-            if (isAuthorValid(authorGiven: randomQuote.author)) {
+            if isAuthorValid(authorGiven: randomQuote.author) {
                 content.body = "\(randomQuote.text)\n— \(randomQuote.author)"
             } else {
                 content.body = "\(randomQuote.text)"
             }
             
-            // Calculate the trigger date for the current notification
+            // Create notification trigger
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+            
+            print(triggerDate)
             
             // Generate a unique identifier for this notification
             let notificationID = UUID().uuidString
@@ -122,13 +116,10 @@ class NotificationScheduler {
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
                     print("Error scheduling notification: \(error.localizedDescription)")
-                } //else {
-                //                    print("Notification scheduled successfully.")
-                //                    print("Body of notification scheduled: \(content.body)")
-                //                    print("Scheduled for this time: \(triggerDate)")
-                //}
+                }
             }
         }
     }
+
 }
 
