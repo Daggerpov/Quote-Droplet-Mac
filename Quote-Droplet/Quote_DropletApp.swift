@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
 struct Quote_DropletApp: App {
@@ -17,7 +18,7 @@ struct Quote_DropletApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     static private(set) var instance: AppDelegate!
     lazy var statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu = ApplicationMenu()
@@ -44,6 +45,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let newPath = NSString.path(withComponents: pathComponents)
             
             NSWorkspace.shared.launchApplication(newPath)
+        }
+        
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                // what was previously in `registerNotifications()` function call is this 3-line block:
+//                DispatchQueue.main.async {
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
+                NotificationScheduler.shared.scheduleNotifications()
+            } else if let error {
+                print(error.localizedDescription)
+            }
         }
     }
 }

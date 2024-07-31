@@ -40,3 +40,18 @@ enum QuoteClassification: String, Codable, CaseIterable {
     }
 }
 
+enum QuoteCategory: String, CaseIterable {
+    case wisdom = "Wisdom"
+    case motivation = "Motivation"
+    case discipline = "Discipline"
+    case philosophy = "Philosophy"
+    case inspiration = "Inspiration"
+    case upliftment = "Upliftment"
+    case love = "Love"
+    case all = "All"
+    case bookmarkedQuotes = "Favorites"
+    var displayName: String {
+        return self.rawValue
+    }
+}
+
