@@ -21,7 +21,7 @@ struct QuoteView: View {
     init(quotes: [QuoteJSON]) { // Initialize QuoteView with quotes
         self.quotes = quotes
     }
-
+    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -36,8 +36,8 @@ struct QuoteView: View {
                             Text(item.rawValue)
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
-                                    (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-                                    (colorScheme == .light ? .black : .primary))
+                                                 (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                                    (colorScheme == .light ? .black : .primary))
                         }
                     }
                 }
@@ -53,9 +53,9 @@ struct QuoteView: View {
                             Text(item.rawValue)
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
-                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-
-                                    (colorScheme == .light ? .black : .primary))
+                                                 (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                                    
+                                                    (colorScheme == .light ? .black : .primary))
                         }
                     }
                 }
@@ -71,15 +71,15 @@ struct QuoteView: View {
                             Text(item.rawValue)
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
-                                     (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-
-                                    (colorScheme == .light ? .black : .primary))
+                                                 (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
+                                                    
+                                                    (colorScheme == .light ? .black : .primary))
                         }
                     }
                 }
             }
             Spacer()
-
+            
             if fetching {
                 ProgressView()
             } else {
@@ -145,13 +145,13 @@ struct QuoteView: View {
                 author = nil
                 return
             }
-
+            
             // Assign the quote and author
             quoteString = randomQuote.text
             author = randomQuote.author == "Unknown Author" ? nil : randomQuote.author
         }
     }
-
+    
 }
 
 struct QuoteView_Previews: PreviewProvider {
