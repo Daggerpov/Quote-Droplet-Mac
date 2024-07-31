@@ -72,6 +72,12 @@ class ApplicationMenu: NSObject {
         //        submitQuoteMenuItem.target = self
         //        menu.addItem(submitQuoteMenuItem)
         
+        let landingMenuItem = NSMenuItem(title: "Visit Landing Page",
+                                         action: #selector(openLink),
+                                         keyEquivalent: "l")
+        landingMenuItem.target = self
+        landingMenuItem.representedObject = "https://quote-droplet-landing.vercel.app/"
+        menu.addItem(landingMenuItem)
         
         let aboutMenuItem = NSMenuItem(title: "About Quote Droplet",
                                        action: #selector(about),
