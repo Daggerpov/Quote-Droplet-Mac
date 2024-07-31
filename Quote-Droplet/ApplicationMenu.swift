@@ -90,7 +90,7 @@ class ApplicationMenu: NSObject {
                                          action: #selector(openLink),
                                          keyEquivalent: "d")
         donateMenuItem.target = self
-//        donateMenuItem.representedObject = "https://github.com/Daggerpov"
+        donateMenuItem.representedObject = "https://buy.stripe.com/fZe17cbqd25Q0Mw000"
         menu.addItem(donateMenuItem)
         
         let quitMenuItem = NSMenuItem(title: "Quit",
@@ -127,12 +127,6 @@ class ApplicationMenu: NSObject {
         """
         aboutPanel.addButton(withTitle: "OK")
         aboutPanel.runModal()
-    }
-    
-    @objc func openLink(sender: NSMenuItem) {
-        let link = sender.representedObject as! String
-        guard let url = URL(string: link) else { return }
-        NSWorkspace.shared.open(url)
     }
     
     @objc func openLink(sender: NSMenuItem) {
