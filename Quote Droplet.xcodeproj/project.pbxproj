@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DC00E4E12C59E7E10005B700 /* notes-to-self.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DC00E4E02C59E7E10005B700 /* notes-to-self.rtf */; };
 		DC00E4E52C59EB580005B700 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */; };
+		DC00E4E72C59EEC10005B700 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC00E4E62C59EEC10005B700 /* JSONHelper.swift */; };
 		DC60145929DE66C300A950F6 /* Quote_DropletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */; };
 		DC60145B29DE66C300A950F6 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60145A29DE66C300A950F6 /* QuoteView.swift */; };
 		DC60145D29DE66C400A950F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC60145C29DE66C400A950F6 /* Assets.xcassets */; };
@@ -19,11 +20,13 @@
 		DC9573572BAE707D000A3645 /* QuoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9573562BAE707D000A3645 /* QuoteManager.swift */; };
 		DC9573592BAE70A9000A3645 /* QuotesBackup.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9573582BAE70A9000A3645 /* QuotesBackup.json */; };
 		DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */; };
+		DCEFC8A22C59F0F500EBE403 /* AuthorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC8A12C59F0F500EBE403 /* AuthorHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC00E4E02C59E7E10005B700 /* notes-to-self.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "notes-to-self.rtf"; sourceTree = "<group>"; };
 		DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		DC00E4E62C59EEC10005B700 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		DC60145529DE66C200A950F6 /* Quote Droplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quote Droplet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote_DropletApp.swift; sourceTree = "<group>"; };
 		DC60145A29DE66C300A950F6 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
@@ -37,6 +40,7 @@
 		DC9573582BAE70A9000A3645 /* QuotesBackup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = QuotesBackup.json; sourceTree = "<group>"; };
 		DCB420C82A64A14400306D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationMenu.swift; sourceTree = "<group>"; };
+		DCEFC8A12C59F0F500EBE403 /* AuthorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,18 +74,19 @@
 		DC60145729DE66C200A950F6 /* Quote-Droplet */ = {
 			isa = PBXGroup;
 			children = (
-				DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */,
+				DCEFC8A02C59EF9900EBE403 /* New-Quote-Retrieval */,
 				DCB420C82A64A14400306D38 /* Info.plist */,
 				DC60145829DE66C200A950F6 /* Quote_DropletApp.swift */,
 				DC60145A29DE66C300A950F6 /* QuoteView.swift */,
 				DC60146729DE696D00A950F6 /* QuoteClassification.swift */,
+				DC9573562BAE707D000A3645 /* QuoteManager.swift */,
+				DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */,
+				DC60146B29DE8CF100A950F6 /* APIService.swift */,
 				DC60146929DE860B00A950F6 /* Quote.swift */,
 				DC60145C29DE66C400A950F6 /* Assets.xcassets */,
 				DC60146129DE66C400A950F6 /* Quote_Droplet.entitlements */,
-				DC60146B29DE8CF100A950F6 /* APIService.swift */,
 				DCDA98FC2A649600006DDA7D /* ApplicationMenu.swift */,
 				DC60145E29DE66C400A950F6 /* Preview Content */,
-				DC9573562BAE707D000A3645 /* QuoteManager.swift */,
 				DC9573582BAE70A9000A3645 /* QuotesBackup.json */,
 			);
 			path = "Quote-Droplet";
@@ -93,6 +98,15 @@
 				DC60145F29DE66C400A950F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DCEFC8A02C59EF9900EBE403 /* New-Quote-Retrieval */ = {
+			isa = PBXGroup;
+			children = (
+				DC00E4E62C59EEC10005B700 /* JSONHelper.swift */,
+				DCEFC8A12C59F0F500EBE403 /* AuthorHelper.swift */,
+			);
+			path = "New-Quote-Retrieval";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +188,8 @@
 				DC60146A29DE860C00A950F6 /* Quote.swift in Sources */,
 				DCDA98FD2A649600006DDA7D /* ApplicationMenu.swift in Sources */,
 				DC60146C29DE8CF100A950F6 /* APIService.swift in Sources */,
+				DC00E4E72C59EEC10005B700 /* JSONHelper.swift in Sources */,
+				DCEFC8A22C59F0F500EBE403 /* AuthorHelper.swift in Sources */,
 				DC9573572BAE707D000A3645 /* QuoteManager.swift in Sources */,
 				DC00E4E52C59EB580005B700 /* NotificationScheduler.swift in Sources */,
 				DC60146829DE696D00A950F6 /* QuoteClassification.swift in Sources */,

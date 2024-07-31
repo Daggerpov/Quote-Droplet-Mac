@@ -18,7 +18,7 @@ struct Quote_DropletApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     static private(set) var instance: AppDelegate!
     lazy var statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu = ApplicationMenu()
@@ -54,9 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if success {
 //                print("All set!")
                 // what was previously in `registerNotifications()` function call is this 3-line block:
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
+//                DispatchQueue.main.async {
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
                 if #available(iOS 15, *) {
                     NotificationScheduler.shared.scheduleNotifications()
                 } else {
