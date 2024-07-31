@@ -9,7 +9,6 @@ import Foundation
 import UserNotifications
 import SwiftUI
 import WidgetKit
-import UIKit
 import Foundation
 
 let notificationPermissionKey = "notificationPermissionGranted"
@@ -92,26 +91,6 @@ class NotificationScheduler {
                 }
                 randomQuote = randomElement
                 content.title = "Quote Droplet"
-            } else if classification.lowercased() == "favorites" {
-                let bookmarkedQuotes = getBookmarkedQuotes().map { $0.toQuoteJSON() }
-                
-                if !bookmarkedQuotes.isEmpty {
-                    let randomIndex = Int.random(in: 0..<bookmarkedQuotes.count)
-                    
-                    let randomElement = bookmarkedQuotes[randomIndex]
-                    randomQuote = randomElement
-                    
-                    content.title = "Quote Droplet: Favorites"
-                    
-                    // Now randomQuote is of type Quote
-                    // Proceed with using randomQuote as needed
-                } else {
-                    // Handle case where bookmarkedQuotes is empty
-                    randomQuote = QuoteJSON(id: 9999999, text: "Please add a quote to favorites by clicking the favorites button under a quote in the app's \"Droplets\" tab", author: "", classification: "Favorites")
-                    content.title = "Quote Droplet: No Favorites Added"
-                    
-                }
-                
             } else {
                 // Fetch a random quote with the specified classification
                 let filteredQuotes = shortQuotes.filter { $0.classification.lowercased() == classification.lowercased() }
