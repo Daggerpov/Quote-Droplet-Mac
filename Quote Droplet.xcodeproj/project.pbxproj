@@ -80,7 +80,6 @@
 				DC60145A29DE66C300A950F6 /* QuoteView.swift */,
 				DC60146729DE696D00A950F6 /* QuoteClassification.swift */,
 				DC9573562BAE707D000A3645 /* QuoteManager.swift */,
-				DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */,
 				DC60146B29DE8CF100A950F6 /* APIService.swift */,
 				DC60146929DE860B00A950F6 /* Quote.swift */,
 				DC60145C29DE66C400A950F6 /* Assets.xcassets */,
@@ -104,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				DC00E4E62C59EEC10005B700 /* JSONHelper.swift */,
+				DC00E4E42C59EB570005B700 /* NotificationScheduler.swift */,
 				DCEFC8A12C59F0F500EBE403 /* AuthorHelper.swift */,
 			);
 			path = "New-Quote-Retrieval";
