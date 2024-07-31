@@ -45,6 +45,7 @@ class NotificationScheduler {
         }
     }
     
+    
     func scheduleNotifications(notificationTime: Date, quoteCategory: QuoteCategory, defaults: Bool) {
         if defaults == false {
             NotificationScheduler.previouslySelectedNotificationTime = notificationTime
@@ -57,24 +58,32 @@ class NotificationScheduler {
         
         let classification = quoteCategory.displayName
         
-        // Create notification content
-        let content = UNMutableNotificationContent()
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "sound-for-noti-water-drip-pixabay.mp3"))
-        
-        let shortQuotes = quotes.filter { $0.text.count <= 100 }
-        
         // Create a calendar instance
         let calendar = Calendar.current
         
         // Get the current date
-        let currentDate = calendar.startOfDay(for: Date())
+        let currentDate = Date()
         
         // Iterate over 60 days
         for i in 0..<60 {
             // Calculate the trigger date for the current notification
-            var triggerDate = calendar.dateComponents([.hour, .minute], from: notificationTime)
-            triggerDate.day = calendar.component(.day, from: currentDate) + i
+            guard let futureDate = calendar.date(byAdding: .day, value: i, to: currentDate) else {
+                print("Error: Unable to calculate future date.")
+                continue
+            }
             
+            var triggerDate = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: notificationTime)
+            triggerDate.year = calendar.component(.year, from: futureDate)
+            triggerDate.month = calendar.component(.month, from: futureDate)
+            triggerDate.day = calendar.component(.day, from: futureDate)
+            
+            print("Trigger date: \(triggerDate)")
+            
+            // Create notification content
+            let content = UNMutableNotificationContent()
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "sound-for-noti-water-drip-pixabay.mp3"))
+            
+            let shortQuotes = quotes.filter { $0.text.count <= 100 }
             
             // Fetch a random quote for the specified classification
             var randomQuote: QuoteJSON
@@ -103,8 +112,6 @@ class NotificationScheduler {
             
             // Create notification trigger
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-            
-            print(triggerDate)
             
             // Generate a unique identifier for this notification
             let notificationID = UUID().uuidString
