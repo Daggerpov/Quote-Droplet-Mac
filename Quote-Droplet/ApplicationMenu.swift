@@ -92,12 +92,12 @@ class ApplicationMenu: NSObject {
         webLinkMenuItem.representedObject = "https://github.com/Daggerpov"
         menu.addItem(webLinkMenuItem)
         
-        let donateMenuItem = NSMenuItem(title: "Donate",
-                                         action: #selector(openLink),
-                                         keyEquivalent: "d")
-        donateMenuItem.target = self
-        donateMenuItem.representedObject = "https://buy.stripe.com/fZe17cbqd25Q0Mw000"
-        menu.addItem(donateMenuItem)
+//        let donateMenuItem = NSMenuItem(title: "Fund My Education",
+//                                         action: #selector(openLink),
+//                                         keyEquivalent: "d")
+//        donateMenuItem.target = self
+//        donateMenuItem.representedObject = "https://buy.stripe.com/fZe17cbqd25Q0Mw000"
+//        menu.addItem(donateMenuItem)
         
         let quitMenuItem = NSMenuItem(title: "Quit",
                                       action: #selector(quit),
