@@ -54,7 +54,7 @@ class ApplicationMenu: NSObject {
         let quoteView = QuoteView(quotes: allQuotes)
         
         let topView = NSHostingView(rootView: quoteView)
-        topView.frame.size = CGSize(width: 250, height: 300)
+        topView.frame.size = CGSize(width: 325, height: 300) // ! previously width of 250
         topView.wantsLayer = true
         topView.layer?.backgroundColor = backgroundColor.cgColor
         

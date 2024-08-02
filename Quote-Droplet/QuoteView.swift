@@ -18,6 +18,8 @@ struct QuoteView: View {
     @Environment(\.colorScheme) private var colorScheme
     let quotes: [QuoteJSON] // Add quotes as a parameter
     
+    @State private var quoteCounts: [QuoteClassification: Int] = [QuoteClassification.discipline: 96]
+    
     init(quotes: [QuoteJSON]) { // Initialize QuoteView with quotes
         self.quotes = quotes
     }
@@ -33,7 +35,7 @@ struct QuoteView: View {
                                 await getQuote(quoteClassification.classification)
                             }
                         } label: {
-                            Text(item.rawValue)
+                            Text("\(item.rawValue) (\(quoteCounts[item] ?? 0))")
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
                                                  (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
@@ -50,7 +52,7 @@ struct QuoteView: View {
                                 await getQuote(quoteClassification.classification)
                             }
                         } label: {
-                            Text(item.rawValue)
+                            Text("\(item.rawValue) (\(quoteCounts[item] ?? 0))")
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
                                                  (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
@@ -68,11 +70,11 @@ struct QuoteView: View {
                                 await getQuote(quoteClassification.classification)
                             }
                         } label: {
-                            Text(item.rawValue)
+                            Text("\(item.rawValue) (\(quoteCounts[item] ?? 0))")
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
                                                  (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-                                                    
+
                                                     (colorScheme == .light ? .black : .primary))
                         }
                     }
@@ -102,6 +104,7 @@ struct QuoteView: View {
         .padding()
         .task {
             await getQuote(quoteClassification.classification)
+            await countQuotesByClassification()
         }
         .background(backgroundColor) // Set the background color based on colorScheme
         .environment(\.colorScheme, .dark) // Set the default color scheme to dark mode for testing
@@ -152,6 +155,17 @@ struct QuoteView: View {
         }
     }
     
+    func countQuotesByClassification() async {
+        quoteCounts = [:]
+        for quote in quotes {
+            var capitalizedClassification = quote.classification
+            capitalizedClassification.capitalizeFirstLetter()
+            
+            let classification = QuoteClassification(rawValue: capitalizedClassification) ?? .everything
+            quoteCounts[classification, default: 0] += 1
+            quoteCounts[QuoteClassification.everything, default: 0] += 1
+        }
+    }
 }
 
 struct QuoteView_Previews: PreviewProvider {
@@ -163,6 +177,16 @@ struct QuoteView_Previews: PreviewProvider {
         ]
         
         return QuoteView(quotes: sampleQuotes)
-            .frame(width: 225, height: 225)
+            .frame(width: 300, height: 225) // ! previous width of 225
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }

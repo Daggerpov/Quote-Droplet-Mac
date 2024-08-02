@@ -77,8 +77,6 @@ class NotificationScheduler {
             triggerDate.month = calendar.component(.month, from: futureDate)
             triggerDate.day = calendar.component(.day, from: futureDate)
             
-            print("Trigger date: \(triggerDate)")
-            
             // Create notification content
             let content = UNMutableNotificationContent()
             content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "sound-for-noti-water-drip-pixabay.mp3"))

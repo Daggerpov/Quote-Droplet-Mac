@@ -46,6 +46,7 @@ func loadQuotesFromJSON() -> [QuoteJSON] {
     }
     return []
 }
+
 //
 //func getLikedQuotes() -> [Quote] {
 //    @AppStorage("likedQuotes", store: UserDefaults(suiteName: "group.selectedSettings"))
