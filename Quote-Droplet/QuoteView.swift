@@ -96,9 +96,16 @@ struct QuoteView: View {
                         .frame(alignment: .center)
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
-                    Text(author ?? "") // Don't show author if blank
-                        .font(.system(size: 14))
-                        .foregroundColor(textColor) // Use the dynamic text color
+                    if (isAuthorValid(authorGiven: author)) {
+                        Text("— \(author ?? "")")  // Don't show author if blank
+                            .font(.system(size: 14))
+                            .foregroundColor(textColor) // Use the dynamic text color
+                    } else {
+//                        Text("")  // Don't show author if blank
+//                            .font(.system(size: 14))
+//                            .foregroundColor(textColor) // Use the dynamic text color
+                        // commented out, since I don't really need any text there if there isn't an author.
+                    }
                 }
                 .id(UUID())
             }
