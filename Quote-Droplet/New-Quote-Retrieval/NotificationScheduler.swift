@@ -32,6 +32,8 @@ class NotificationScheduler {
     
     private var quotes = [QuoteJSON]()
     
+    public static var defaultScheduledNotificationTime: Date = Calendar.current.date(byAdding: .minute, value: 3, to: Date.now) ?? Date.now
+    
     private init() {
         quotes = loadQuotesFromJSON()
     }
