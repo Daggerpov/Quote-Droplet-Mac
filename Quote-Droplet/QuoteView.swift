@@ -15,6 +15,8 @@ struct QuoteView: View {
     @State private var fetching = false
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
     
+    @State private var notificationTime = Date()
+    
     @Environment(\.colorScheme) private var colorScheme
     let quotes: [QuoteJSON] // Add quotes as a parameter
     
@@ -74,7 +76,7 @@ struct QuoteView: View {
                                 .font(.system(size: 11))
                                 .foregroundColor(item == quoteClassification ?
                                                  (colorScheme == .light ? Color(red: 0.0, green: 0.1, blue: 0.4) : .blue) :
-
+                                                    
                                                     (colorScheme == .light ? .black : .primary))
                         }
                     }
@@ -101,12 +103,41 @@ struct QuoteView: View {
                 .id(UUID())
             }
             Spacer()
+            DatePicker("Daily Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                .datePickerStyle(.automatic) // no other options looked better, UI-wise
         }
         .padding()
         .task {
             await getQuote(quoteClassification.classification)
             await countQuotesByClassification()
         }
+        .onAppear() {
+            if NotificationScheduler.isDefaultConfigOverwritten {
+                notificationTime = NotificationScheduler.previouslySelectedNotificationTime
+            } else {
+                notificationTime = NotificationScheduler.defaultScheduledNotificationTime
+            }
+        }
+        .onChange(of: quoteClassification, perform: { value in
+                NotificationScheduler.shared.scheduleNotifications(
+                    notificationTime:
+                        notificationTime,
+                    quoteCategory:
+                        quoteClassification.toQuoteCategory() ?? QuoteCategory.all,
+                    defaults: false
+                )
+            }
+        )
+        .onChange(of: notificationTime, perform: { value in
+                NotificationScheduler.shared.scheduleNotifications(
+                    notificationTime:
+                        notificationTime,
+                    quoteCategory:
+                        quoteClassification.toQuoteCategory() ?? QuoteCategory.all,
+                    defaults: false
+                )
+            }
+        )
         .background(backgroundColor) // Set the background color based on colorScheme
         .environment(\.colorScheme, .dark) // Set the default color scheme to dark mode for testing
     }
@@ -186,7 +217,7 @@ extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-
+    
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
