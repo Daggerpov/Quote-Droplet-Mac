@@ -87,10 +87,11 @@ struct QuoteView: View {
             } else {
                 VStack {
                     Text(quoteString)
-                        .font(.system(size: 20))
+                        .font(.system(size: 500)) // previously 20
                         .lineLimit(nil)
-                        .minimumScaleFactor(0.5)
                         .foregroundColor(textColor) // Use the dynamic text color
+                        .minimumScaleFactor(0.01) // ! previously 0.5
+                        .frame(alignment: .center)
                     Spacer()
                         .frame(height: 5) // Adjust the height as needed
                     Text(author ?? "") // Don't show author if blank
