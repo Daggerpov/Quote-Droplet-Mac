@@ -38,6 +38,27 @@ enum QuoteClassification: String, Codable, CaseIterable {
             return "all"
         }
     }
+    // Method to convert to QuoteCategory
+    func toQuoteCategory() -> QuoteCategory? {
+        switch self {
+        case .motivation:
+            return .motivation
+        case .inspiration:
+            return .inspiration
+        case .philosophy:
+            return .philosophy
+        case .discipline:
+            return .discipline
+        case .wisdom:
+            return .wisdom
+        case .upliftment:
+            return .upliftment
+        case .love:
+            return .love
+        case .everything:
+            return .all
+        }
+    }
 }
 
 enum QuoteCategory: String, CaseIterable {
