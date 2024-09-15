@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+import UserNotifications
+import Foundation
+import StoreKit
 
 struct QuoteView: View {
     
@@ -110,8 +114,21 @@ struct QuoteView: View {
                 .id(UUID())
             }
             Spacer()
-            DatePicker("Daily Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
-                .datePickerStyle(.automatic) // no other options looked better, UI-wise
+            HStack{
+                let authorForSharing = (isAuthorValid(authorGiven: author)) ? author : ""
+                let wholeAuthorText = (authorForSharing != "") ? "\n— \(authorForSharing ?? "Unknown Author")" : ""
+                Button(action: {
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString("\(quoteString)\(wholeAuthorText)",
+                                                   forType: .string)
+                }) {
+                    Image(systemName: "doc.on.doc")
+                        .font(.title)
+                        .scaleEffect(1)
+                }.padding(.leading, 5)
+                DatePicker("Daily Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.automatic) // no other options looked better, UI-wise
+            }
         }
         .padding()
         .task {
