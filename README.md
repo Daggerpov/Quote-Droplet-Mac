@@ -1,6 +1,6 @@
 # Quote-Droplet
 
-## Download Instructions (for macOS >= 12.0 Monterey)
+## (Legacy -- now it's simply on the App Store) Download Instructions (for macOS >= 12.0 Monterey)
 
 1. Click on the latest release
 
