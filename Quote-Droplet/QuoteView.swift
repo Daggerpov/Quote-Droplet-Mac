@@ -17,6 +17,8 @@ struct QuoteView: View {
     @State private var quoteString = "No Quote Found"
     @State private var author: String? = nil
     @State private var fetching = false
+    @FocusState private var isDatePickerFocused: Bool
+    @FocusState private var focusedField: Bool
     @AppStorage("quoteClassification") var quoteClassification: QuoteClassification = .everything
     
     @State private var notificationTime = Date()
@@ -126,8 +128,19 @@ struct QuoteView: View {
                         .font(.title)
                         .scaleEffect(1)
                 }.padding(.leading, 5)
-                DatePicker("Daily Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.automatic) // no other options looked better, UI-wise
+                //                Text("Schedule Notifications").overlay {
+                if #available(macOS 13.0, *) {
+                    Form{
+                        DatePicker("Schedule Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(.stepperField)
+                            .focused($focusedField, equals: true)
+                    }.defaultFocus($focusedField, true)
+                } else {
+                    // Fallback on earlier versions
+                    DatePicker("Schedule Notifications:", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.stepperField)
+                }
+                
             }
         }
         .padding()
@@ -141,6 +154,8 @@ struct QuoteView: View {
             } else {
                 notificationTime = NotificationScheduler.defaultScheduledNotificationTime
             }
+            isDatePickerFocused = true
+            focusedField = true
         }
         .onChange(of: quoteClassification, perform: { value in
                 NotificationScheduler.shared.scheduleNotifications(

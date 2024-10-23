@@ -47,15 +47,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             NSWorkspace.shared.launchApplication(newPath)
         }
         
-        
         UNUserNotificationCenter.current().delegate = self
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                // what was previously in `registerNotifications()` function call is this 3-line block:
-//                DispatchQueue.main.async {
-//                    UIApplication.shared.registerForRemoteNotifications()
-//                }
                 NotificationScheduler.shared.scheduleNotifications()
             } else if let error {
                 print(error.localizedDescription)
