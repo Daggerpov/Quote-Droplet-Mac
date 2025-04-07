@@ -72,6 +72,24 @@ class ApplicationMenu: NSObject {
         //        submitQuoteMenuItem.target = self
         //        menu.addItem(submitQuoteMenuItem)
 
+		// MARK - submit a quote
+
+        let quoteSubmissionMenuItem = NSMenuItem(title: "Submit a Quote",
+                                         action: #selector(openLink),
+                                         keyEquivalent: "s")
+		quoteSubmissionMenuItem.target = self
+		quoteSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-quote"
+        menu.addItem(quoteSubmissionMenuItem)
+
+		// MARK - submit feedback
+
+        let feedbackSubmissionMenuItem = NSMenuItem(title: "Submit Feedback",
+                                         action: #selector(openLink),
+                                         keyEquivalent: "f")
+		feedbackSubmissionMenuItem.target = self
+		feedbackSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-feedback"
+        menu.addItem(feedbackSubmissionMenuItem)
+
 		// MARK - landing page
 
         let landingMenuItem = NSMenuItem(title: "Visit Landing Page",
@@ -90,31 +108,14 @@ class ApplicationMenu: NSObject {
         menu.addItem(aboutMenuItem)
 
 		// MARK - github
-
-        let webLinkMenuItem = NSMenuItem(title: "Visit my GitHub",
-                                         action: #selector(openLink),
-                                         keyEquivalent: "g")
-        webLinkMenuItem.target = self
-        webLinkMenuItem.representedObject = "https://github.com/Daggerpov"
-        menu.addItem(webLinkMenuItem)
-
-		// MARK - submit a quote
-
-        let quoteSubmissionMenuItem = NSMenuItem(title: "Submit a Quote",
-                                         action: #selector(openLink),
-                                         keyEquivalent: "s")
-		quoteSubmissionMenuItem.target = self
-		quoteSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-quote"
-        menu.addItem(quoteSubmissionMenuItem)
-
-		// MARK - submit feedback
-
-        let feedbackSubmissionMenuItem = NSMenuItem(title: "Submit Feedback",
-                                         action: #selector(openLink),
-                                         keyEquivalent: "f")
-		feedbackSubmissionMenuItem.target = self
-		feedbackSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-feedback"
-        menu.addItem(feedbackSubmissionMenuItem)
+//
+//        let webLinkMenuItem = NSMenuItem(title: "Visit my GitHub",
+//                                         action: #selector(openLink),
+//                                         keyEquivalent: "g")
+//        webLinkMenuItem.target = self
+//        webLinkMenuItem.representedObject = "https://github.com/Daggerpov"
+//        menu.addItem(webLinkMenuItem)
+//
 
 //        let donateMenuItem = NSMenuItem(title: "Fund My Education",
 //                                         action: #selector(openLink),
