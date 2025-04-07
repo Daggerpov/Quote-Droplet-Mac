@@ -12,8 +12,6 @@ import Foundation
 import StoreKit
 
 struct QuoteView: View {
-    
-    
     @State private var quoteString = "No Quote Found"
     @State private var author: String? = nil
     @State private var fetching = false
