@@ -51,9 +51,8 @@ class ApplicationMenu: NSObject {
         let quoteView = QuoteView(quotes: allQuotes)
         
         let topView = NSHostingView(rootView: quoteView)
-        topView.frame.size = CGSize(width: 325, height: 300) // ! previously width of 250
-        topView.wantsLayer = true
-        topView.layer?.backgroundColor = backgroundColor.cgColor
+        topView.frame.size = CGSize(width: 340, height: 340) // ! previously width of 250, then 325
+        // SwiftUI draws the background (it follows light/dark mode)
         
         let customMenuItem = NSMenuItem()
         customMenuItem.view = topView
@@ -68,6 +67,7 @@ class ApplicationMenu: NSObject {
                                          action: #selector(openLink),
                                          keyEquivalent: "s")
 		quoteSubmissionMenuItem.target = self
+		quoteSubmissionMenuItem.image = NSImage(systemSymbolName: "square.and.pencil", accessibilityDescription: nil)
 		quoteSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-quote"
         menu.addItem(quoteSubmissionMenuItem)
 
@@ -77,6 +77,7 @@ class ApplicationMenu: NSObject {
                                          action: #selector(openLink),
                                          keyEquivalent: "f")
 		feedbackSubmissionMenuItem.target = self
+		feedbackSubmissionMenuItem.image = NSImage(systemSymbolName: "bubble.left", accessibilityDescription: nil)
 		feedbackSubmissionMenuItem.representedObject = "https://quote-dropper-production.up.railway.app/submit-feedback"
         menu.addItem(feedbackSubmissionMenuItem)
 
@@ -86,6 +87,7 @@ class ApplicationMenu: NSObject {
                                          action: #selector(openLink),
                                          keyEquivalent: "l")
         landingMenuItem.target = self
+        landingMenuItem.image = NSImage(systemSymbolName: "globe", accessibilityDescription: nil)
         landingMenuItem.representedObject = "https://quote-droplet-landing.vercel.app/"
         menu.addItem(landingMenuItem)
         
@@ -95,26 +97,18 @@ class ApplicationMenu: NSObject {
                                        action: #selector(about),
                                        keyEquivalent: "a")
         aboutMenuItem.target = self
+        aboutMenuItem.image = NSImage(systemSymbolName: "info.circle", accessibilityDescription: nil)
         menu.addItem(aboutMenuItem)
+        menu.addItem(NSMenuItem.separator())
 
         let quitMenuItem = NSMenuItem(title: "Quit",
                                       action: #selector(quit),
                                       keyEquivalent: "q")
         quitMenuItem.target = self
+        quitMenuItem.image = NSImage(systemSymbolName: "power", accessibilityDescription: nil)
         menu.addItem(quitMenuItem)
         
         return menu
-    }
-    
-    // Compute the dynamic background color based on the color scheme
-    private var backgroundColor: NSColor {
-        if NSApp.effectiveAppearance.name == .darkAqua {
-            // Use dark wood background color for dark mode
-            return NSColor(red: 0.15, green: 0.1, blue: 0.05, alpha: 1.0)
-        } else {
-            // Use light wood background color for light mode
-            return NSColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
-        }
     }
     
     @objc func about(sender: NSMenuItem) {
